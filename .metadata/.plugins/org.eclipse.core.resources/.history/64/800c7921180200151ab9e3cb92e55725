@@ -1,0 +1,5 @@
+package com.dudeclothing.admin.config;
+
+public class PersistenceJPAConfig {
+
+}

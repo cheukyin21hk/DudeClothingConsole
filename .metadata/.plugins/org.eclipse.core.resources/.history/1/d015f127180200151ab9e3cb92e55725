@@ -1,0 +1,7 @@
+package com.dudeclothing.admin.config;
+
+@Configuration
+class PersistenceContext {
+
+	// Configure the required beans here
+}

@@ -1,0 +1,13 @@
+package com.dudeclothing.admin.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "item")
+public class Item {
+	private int itemId;
+	private int brandId;
+	private String size;
+	private String name;
+}

@@ -1,0 +1,15 @@
+package com.dudeclothing.admin.model;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "status")
+public class Status {
+
+	@Id
+	@GeneratedValue
+	private int statusId;
+	private String name;
+
+}

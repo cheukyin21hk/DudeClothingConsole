@@ -1,0 +1,7 @@
+package com.dudeclothing.admin.model;
+
+@Entity
+@Table(name = "status")
+public class Status {
+
+}
