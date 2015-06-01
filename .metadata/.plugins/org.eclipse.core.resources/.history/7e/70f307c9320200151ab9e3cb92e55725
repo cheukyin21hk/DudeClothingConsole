@@ -1,9 +1,0 @@
-package com.dudeclothing.admin.config;
-
-import org.springframework.context.annotation.Configuration;
-
-@Configuration
-class PersistenceContext {
-
-	// Configure the required beans here
-}

@@ -10,3 +10,11 @@
 1432666329094	Rename resource 'persistence.xml'
 1432741858055	Delete elements
 1432741975164	Delete elements
+1432978414342	Rename field 'accountRepo'
+1432978427346	Rename field 'accountRepo'
+1432978486019	Rename local variable 'account'
+1432978502293	Rename field 'currencyRepo'
+1432978688042	Rename field 'currencyRepo'
+1433003274564	Rename resource 'ClientMgt.jsp'
+1433003297786	Rename resource 'OrderMgt.jsp'
+1433003313747	Rename resource 'PurchaseMgt.jsp'

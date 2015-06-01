@@ -1,0 +1,5 @@
+package com.dudeclothing.admin.model;
+
+public class CurrencyList {
+
+}

@@ -1,8 +1,0 @@
-package com.dudeclothing.admin.model;
-
-public class testObject {
-	private String test1;
-	private String test2;
-	
-	
-}

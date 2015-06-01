@@ -3,13 +3,12 @@ package com.dudeclothing.admin.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
-
 /**
  * The persistent class for the stock database table.
  * 
  */
 @Entity
-@NamedQuery(name="Stock.findAll", query="SELECT s FROM Stock s")
+@NamedQuery(name = "Stock.findAll", query = "SELECT s FROM Stock s")
 public class Stock implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -19,17 +18,25 @@ public class Stock implements Serializable {
 	private String name;
 
 	private String size;
+	
+	public Character getSold() {
+		return sold;
+	}
 
-	private byte sold;
+	public void setSold(Character sold) {
+		this.sold = sold;
+	}
 
-	//bi-directional many-to-one association to Brand
+	private Character sold;
+
+	// bi-directional many-to-one association to Brand
 	@ManyToOne
-	@JoinColumn(name="brandId")
+	@JoinColumn(name = "brandId")
 	private Brand brand;
 
-	//bi-directional many-to-one association to Purchase
+	// bi-directional many-to-one association to Purchase
 	@ManyToOne
-	@JoinColumn(name="purchaseId")
+	@JoinColumn(name = "purchaseId")
 	private Purchase purchase;
 
 	public Stock() {
@@ -59,13 +66,6 @@ public class Stock implements Serializable {
 		this.size = size;
 	}
 
-	public byte getSold() {
-		return this.sold;
-	}
-
-	public void setSold(byte sold) {
-		this.sold = sold;
-	}
 
 	public Brand getBrand() {
 		return this.brand;

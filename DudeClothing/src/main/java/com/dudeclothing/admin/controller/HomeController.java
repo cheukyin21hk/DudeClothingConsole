@@ -26,7 +26,7 @@ public class HomeController {
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String listAll(Model model) {
-		model.addAttribute("persons",  testObjectSvc.getAll());
+		model.addAttribute("persons", testObjectSvc.getAll());
 		return "home";
 	}
 
@@ -38,5 +38,25 @@ public class HomeController {
 	public String addPerson(@ModelAttribute TestObject person) {
 		testObjectSvc.add(person);
 		return "redirect:/";
+	}
+
+	@RequestMapping(value = "/basicInfo", method = RequestMethod.GET)
+	public String basicInfoPage() {
+		return "basicInfo";
+	}
+
+	@RequestMapping(value = "/clientInfo", method = RequestMethod.GET)
+	public String clientInfo() {
+		return "clientMgt";
+	}
+
+	@RequestMapping(value = "/orderInfo", method = RequestMethod.GET)
+	public String orderInfo() {
+		return "orderMgt";
+	}
+
+	@RequestMapping(value = "/purchaseInfo", method = RequestMethod.GET)
+	public String purchaseInfo() {
+		return "purchaseMgt";
 	}
 }

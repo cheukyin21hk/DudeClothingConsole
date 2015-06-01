@@ -1,5 +1,0 @@
-@Configuration
-class PersistenceContext {
- 
-    //Configure the required beans here
-}

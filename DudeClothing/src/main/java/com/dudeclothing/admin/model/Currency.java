@@ -1,8 +1,11 @@
 package com.dudeclothing.admin.model;
 
-import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
 /**
@@ -10,8 +13,8 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Currency.findAll", query="SELECT c FROM Currency c")
-public class Currency implements Serializable {
+@Table(name = "currency")
+public class Currency {
 	private static final long serialVersionUID = 1L;
 
 	@Id

@@ -5,10 +5,12 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /*This is the controller to carry the CRUD operation 
  * for the basic info ( Brand,Status,Currency,Account)*/
@@ -20,37 +22,8 @@ public class BasicInfoController {
 			.getLogger(BasicInfoController.class);
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String testData() {
-		logger.info("method success");
+	public String index() {
 		return "basicInfo";
-	}
-
-	@ModelAttribute("statusList")
-	public Map<String, String> statusList() {
-		Map<String, String> list = new HashMap<String, String>();
-		list.put("statusList", "Status List");
-		return list;
-	}
-
-	@ModelAttribute("accountList")
-	public Map<String, String> accountList() {
-		Map<String, String> list = new HashMap<String, String>();
-		list.put("accountList", "Account List");
-		return list;
-	}
-
-	@ModelAttribute("currencyList")
-	public Map<String, String> currencyList() {
-		Map<String, String> list = new HashMap<String, String>();
-		list.put("currencyList", "Currency List");
-		return list;
-	}
-
-	@ModelAttribute("brandList")
-	public Map<String, String> brandList() {
-		Map<String, String> list = new HashMap<String, String>();
-		list.put("brandList", "Brand List");
-		return list;
 	}
 
 	@RequestMapping(value = "/addbrand", method = RequestMethod.GET)
@@ -65,7 +38,7 @@ public class BasicInfoController {
 
 	@RequestMapping(value = "/deletebrand", method = RequestMethod.GET)
 	public Boolean deleteBrand() {
-		return false;
+		return new Boolean(false);
 	}
 
 	@RequestMapping(value = "/addaccount", method = RequestMethod.GET)
