@@ -16,7 +16,7 @@
 			<br /> Currency Name : <input type="text"><br /> Currency
 			Rate : <input type="text">
 		</div>
-
+ 
 		<div class="legend1" id="accountForm">
 			<br /> Account : <input type="text"><br />
 		</div>

@@ -23,4 +23,5 @@
 <fullyQualifiedTypeName name="com.dudeclothing.admin.model.Currency"/>
 <fullyQualifiedTypeName name="com.dudeclothing.admin.model.Order"/>
 <fullyQualifiedTypeName name="com.dudeclothing.admin.model.Status"/>
+<fullyQualifiedTypeName name="org.hibernate.annotations.common.util.impl.Log_.logger"/>
 </qualifiedTypeNameHistroy>

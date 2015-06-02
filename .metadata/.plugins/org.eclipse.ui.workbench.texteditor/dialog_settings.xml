@@ -2,22 +2,23 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="stock" key="selection"/>
+		<item value="" key="selection"/>
 		<item value="true" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="status"/>
-			<item value="Status"/>
-			<item value="purchase"/>
-			<item value="Purchase"/>
-			<item value="order"/>
-			<item value="Order"/>
-			<item value="currency"/>
-			<item value="Currency"/>
+			<item value="logger"/>
+			<item value="height"/>
+			<item value="please"/>
+			<item value="Book"/>
+			<item value="account"/>
+			<item value="List"/>
+			<item value="user"/>
+			<item value="user List"/>
 		</list>
 		<list key="replacehistory">
+			<item value="Account"/>
 			<item value="stock"/>
 			<item value="Stock"/>
 			<item value="status"/>
@@ -25,14 +26,13 @@
 			<item value="purchase"/>
 			<item value="Purchase"/>
 			<item value="Order"/>
-			<item value="Item"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="265" key="DIALOG_WIDTH"/>
 		<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
 		<item value="399" key="DIALOG_HEIGHT"/>
-		<item value="981" key="DIALOG_X_ORIGIN"/>
+		<item value="614" key="DIALOG_X_ORIGIN"/>
 		<item value="112" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

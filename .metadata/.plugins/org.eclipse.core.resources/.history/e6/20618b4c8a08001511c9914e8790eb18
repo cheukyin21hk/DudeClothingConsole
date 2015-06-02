@@ -1,0 +1,100 @@
+Ext.require([ 'Ext.grid.*', 'Ext.data.*', 'Ext.panel.*',
+		'Ext.layout.container.Border' ]);
+
+Ext
+		.onReady(function() {
+			Ext.define('Account', {
+				extend : 'Ext.data.Model',
+				fields : [ {
+					name : 'accountId',
+					type : 'int'
+				}, {
+					name : 'name',
+					type : 'string'
+				}
+
+				]
+			});
+
+			// create the Data Store
+			var store = Ext
+					.create(
+							'Ext.data.Store',
+							{
+								autoLoad : true,
+								autoSync : true,
+								model : 'Account',
+								proxy : {
+									type : 'rest',
+									url : 'app.php/users',
+									reader : {
+										type : 'json',
+										rootProperty : 'data'
+									},
+									writer : {
+										type : 'json'
+									}
+								},
+								listeners : {
+									write : function(store, operation) {
+										var record = operation.getRecords()[0], name = Ext.String
+												.capitalize(operation.action), verb;
+
+										if (name == 'Destroy') {
+											verb = 'Destroyed';
+										} else {
+											verb = name + 'd';
+										}
+										Ext.example.msg(name, Ext.String
+												.format("{0} user: {1}", verb,
+														record.getId()));
+
+									}
+								}
+							});
+
+			// create the grid
+			var grid = Ext.create('Ext.grid.Panel', {
+				bufferedRenderer : false,
+				store : store,
+				columns : [ {
+					text : "Account",
+					width : 120,
+					dataIndex : 'accountId',
+					sortable : true
+				}, {
+					text : "Account Name",
+					flex : 1,
+					dataIndex : 'name',
+				}],
+				forceFit : false,
+				height : 210,
+				split : true,
+				region : 'north'
+			});
+
+			
+
+			Ext.create('Ext.Panel', {
+				renderTo : 'grid',
+				frame : true,
+				title : 'Account List',
+				width : 250,
+				height : 400,
+				layout : 'border',
+				items : [ grid ]
+			});
+
+			// update panel body on selection change
+			grid.getSelectionModel().on(
+					'selectionchange',
+					function(sm, selectedRecord) {
+						if (selectedRecord.length) {
+							var detailPanel = Ext.getCmp('detailPanel');
+							detailPanel.update(bookTpl
+									.apply(selectedRecord[0].data));
+						}
+					});
+
+			store.load();
+		});

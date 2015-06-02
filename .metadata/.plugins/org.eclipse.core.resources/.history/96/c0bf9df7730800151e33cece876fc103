@@ -1,0 +1,13 @@
+package com.dudeclothing.admin.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import com.dudeclothing.admin.service.TestObjectServices;
+
+@Controller
+public class AccountController {
+	@Autowired
+	private TestObjectServices testObjectSvc;
+
+}

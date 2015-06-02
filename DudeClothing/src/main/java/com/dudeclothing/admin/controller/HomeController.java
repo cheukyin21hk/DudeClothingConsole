@@ -27,7 +27,7 @@ public class HomeController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String listAll(Model model) {
 		model.addAttribute("persons", testObjectSvc.getAll());
-		return "home";
+		return "testExtJs";
 	}
 
 	/**
@@ -59,4 +59,5 @@ public class HomeController {
 	public String purchaseInfo() {
 		return "purchaseMgt";
 	}
+	
 }

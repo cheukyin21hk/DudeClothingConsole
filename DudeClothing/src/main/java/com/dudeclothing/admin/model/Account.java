@@ -1,29 +1,35 @@
 package com.dudeclothing.admin.model;
 
-import java.io.Serializable;
-import javax.persistence.*;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 /**
  * The persistent class for the account database table.
  * 
  */
 @Entity
-@NamedQuery(name="Account.findAll", query="SELECT a FROM Account a")
-public class Account implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Account {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int accountId;
 
 	private String name;
 
-	//bi-directional many-to-one association to Order
-	@OneToMany(mappedBy="account")
+	// bi-directional many-to-one association to Order
+	@OneToMany(mappedBy = "account")
 	private List<Order> orders;
 
 	public Account() {
+	}
+
+	public Account(String name) {
+		this.name = name;
 	}
 
 	public int getAccountId() {
