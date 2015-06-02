@@ -1,5 +1,6 @@
 package com.dudeclothing.admin.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +20,17 @@ public class AccountController {
 	@Autowired
 	private AccountServices accountServices;
 
-	@RequestMapping(value="/accounts",method = RequestMethod.GET)
+	@RequestMapping(value = "/accounts", method = RequestMethod.GET)
 	@ResponseBody
-	public List<Account> listAll() {
+	public List<Account> listAll(Model model) {
 		System.out.println("Account list all is called");
 		List<Account> list = accountServices.getAll();
 		return list;
 	}
-	
-	@RequestMapping(value="/add",method = RequestMethod.GET)
-	public Account addAccount(@RequestParam(value="name")String name){
+
+	@RequestMapping(value = "/add", method = RequestMethod.GET)
+	@ResponseBody
+	public Account addAccount(@RequestParam(value = "name") String name) {
 		System.out.println("Person added");
 		Account account = new Account(name);
 		accountServices.add(account);

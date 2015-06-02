@@ -34,7 +34,7 @@
 		<property name="username" value="system" />
 		<property name="password" value="Database123" />
 	</bean>
-	
+
 	<!-- EntityManagerFactory -->
 	<bean
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"

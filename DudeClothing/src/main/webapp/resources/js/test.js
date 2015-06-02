@@ -22,7 +22,7 @@ Ext.onReady(function() {
 		model : 'Account',
 		proxy : {
 			type : 'rest',
-			url : 'admin/account/accounts',
+			url : 'account/accounts',
 			reader : {
 				type : 'json',
 				rootProperty : 'data'
