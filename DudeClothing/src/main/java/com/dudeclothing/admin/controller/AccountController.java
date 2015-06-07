@@ -1,6 +1,5 @@
 package com.dudeclothing.admin.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +30,10 @@ public class AccountController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	@ResponseBody
 	public Account addAccount(@RequestParam(value = "name") String name) {
-		System.out.println("Person added");
+		System.out.println("Account added");
 		Account account = new Account(name);
 		accountServices.add(account);
+		System.out.println(account.toString());
 		return account;
 	}
 

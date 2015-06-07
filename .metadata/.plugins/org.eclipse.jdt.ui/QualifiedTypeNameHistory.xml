@@ -20,8 +20,8 @@
 <fullyQualifiedTypeName name="javax.persistence.Table"/>
 <fullyQualifiedTypeName name="javax.persistence.Id"/>
 <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
-<fullyQualifiedTypeName name="com.dudeclothing.admin.model.Currency"/>
 <fullyQualifiedTypeName name="com.dudeclothing.admin.model.Order"/>
 <fullyQualifiedTypeName name="com.dudeclothing.admin.model.Status"/>
 <fullyQualifiedTypeName name="org.hibernate.annotations.common.util.impl.Log_.logger"/>
+<fullyQualifiedTypeName name="com.dudeclothing.admin.model.Currency"/>
 </qualifiedTypeNameHistroy>

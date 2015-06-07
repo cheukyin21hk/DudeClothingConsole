@@ -1,27 +1,22 @@
 package com.dudeclothing.admin.model;
 
-import java.io.Serializable;
-import javax.persistence.*;
-import java.util.List;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * The persistent class for the status database table.
  * 
  */
 @Entity
-@NamedQuery(name="Status.findAll", query="SELECT s FROM Status s")
-public class Status implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Status {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int statusId;
 
 	private String name;
-
-	//bi-directional many-to-one association to Order
-	@OneToMany(mappedBy="status")
-	private List<Order> orders;
 
 	public Status() {
 	}
@@ -40,28 +35,6 @@ public class Status implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public List<Order> getOrders() {
-		return this.orders;
-	}
-
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
-
-	public Order addOrder(Order order) {
-		getOrders().add(order);
-		order.setStatus(this);
-
-		return order;
-	}
-
-	public Order removeOrder(Order order) {
-		getOrders().remove(order);
-		order.setStatus(null);
-
-		return order;
 	}
 
 }

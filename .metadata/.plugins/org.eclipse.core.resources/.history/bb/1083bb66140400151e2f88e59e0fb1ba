@@ -1,5 +1,0 @@
-package com.dudeclothing.admin.dataRepo;
-
-public interface TestObjectRepository {
-
-}

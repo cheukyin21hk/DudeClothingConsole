@@ -1,12 +1,10 @@
 package com.dudeclothing.admin.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 
 /**
  * The persistent class for the currency database table.
@@ -15,18 +13,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "currency")
 public class Currency {
-	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int currencyId;
 
 	private String name;
 
 	private float rate;
-
-	//bi-directional many-to-one association to Purchase
-	@OneToMany(mappedBy="currency")
-	private List<Purchase> purchases;
 
 	public Currency() {
 	}
@@ -53,28 +47,6 @@ public class Currency {
 
 	public void setRate(float rate) {
 		this.rate = rate;
-	}
-
-	public List<Purchase> getPurchases() {
-		return this.purchases;
-	}
-
-	public void setPurchases(List<Purchase> purchases) {
-		this.purchases = purchases;
-	}
-
-	public Purchase addPurchas(Purchase purchas) {
-		getPurchases().add(purchas);
-		purchas.setCurrency(this);
-
-		return purchas;
-	}
-
-	public Purchase removePurchas(Purchase purchas) {
-		getPurchases().remove(purchas);
-		purchas.setCurrency(null);
-
-		return purchas;
 	}
 
 }

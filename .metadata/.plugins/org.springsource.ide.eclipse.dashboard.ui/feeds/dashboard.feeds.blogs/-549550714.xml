@@ -5,7 +5,208 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2015-06-02T08:28:00Z</updated>
+  <updated>2015-06-04T17:00:00Z</updated>
+  <entry>
+    <title>Happy second birthday, Java EE 7! How is it going in production?</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/06/04/happy-second-birthday-java-ee-7-how-is-it-going-in-production" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Juergen Hoeller</name>
+    </author>
+    <id>tag:spring.io,2015-06-02:2149</id>
+    <updated>2015-06-04T17:00:00Z</updated>
+    <content type="html">&lt;p&gt;In our quest for Java EE integration, we&amp;rsquo;re trying to actively embrace the latest generation of specifications such as JPA, Bean Validation and of course the Servlet and JMS APIs. As of Spring 4, we&amp;rsquo;re supporting the &lt;a href="http://docs.spring.io/spring/docs/current/spring-framework-reference/html/new-in-4.0.html#_java_ee_6_and_7"&gt;Java EE 6 and 7 level of specifications side by side&lt;/a&gt;. We would like to raise it to the EE 7+ level (JPA 2.1, Bean Validation 1.1, and in particular Servlet 3.1 and JMS 2.0) soon but are facing a fundamental problem: &lt;b&gt;the lack of EE 7 platform adoption.&lt;/b&gt;&lt;/p&gt;&lt;p&gt;The &lt;a href="https://jcp.org/en/jsr/detail?id=342"&gt;Java EE 7 platform&lt;/a&gt; has been released in May 2013 and is therefore two years old now. Surprisingly, it&amp;rsquo;s hardly to be found in production yet. But then that&amp;rsquo;s not so surprising really: While &lt;a href="http://www.oracle.com/technetwork/java/javaee/overview/compatibility-jsp-136984.html"&gt;a few projects have been certified for EE 7 in the meantime&lt;/a&gt;, the lack of major vendors is apparent: There are no major EE 7 servers with production support yet, not for the web profile and not for the full platform either. As of June 2015, the common EE vendors still sell licenses for servers based on &lt;a href="https://jcp.org/en/jsr/detail?id=316"&gt;2009-era Java EE 6 APIs&lt;/a&gt;. And it&amp;rsquo;s not just the traditional suspects:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Tomitribe provides support for &lt;a href="http://tomee.apache.org/"&gt;TomEE 1.7&lt;/a&gt;, a Tomcat 7 based EE 6 Web Profile stack, based on 2009-era EE 6 APIs but compatible with JSR-356 WebSockets and JDK 8 at least. TomEE 2.0 will be an EE 7 offering based on Tomcat 8 but hasn&amp;rsquo;t been released yet.&lt;/li&gt;
+  &lt;li&gt;Red Hat&amp;rsquo;s most recent support offering is &lt;a href="http://www.jboss.org/products/eap/overview/"&gt;JBoss EAP 6.4&lt;/a&gt;, a JBoss 7 based EE 6 stack with JSR-356 WebSockets and JDK 8 support in the meantime. Note that WildFly is an R&amp;amp;D project without maintenance releases and without any kind of production support.&lt;/li&gt;
+  &lt;li&gt;Oracle ships &lt;a href="https://docs.oracle.com/middleware/1213/wls/INTRO/compatibility.htm#INTRO112"&gt;WebLogic 12.1.3&lt;/a&gt;, an EE 6 server with a bit of EE 7 (JPA 2.1, JAX-RS 2.0, JSR-356 WebSockets) and JDK 8 support. WebLogic 12.1.4 as a full EE 7 server has been announced for a long time now but is still not released. And GlassFish 4 is just an RI&amp;hellip;&lt;/li&gt;
+  &lt;li&gt;The IBM WebSphere team does a fine job implementing EE 7 specs for the &lt;a href="https://developer.ibm.com/wasdev/blog/2015/05/20/java-ee-7-in-liberty-so-far/"&gt;WebSphere Liberty Profile&lt;/a&gt; but hasn&amp;rsquo;t completed the effort yet. At least, some EE 7 modules and JDK 8 are supported in production already, as a kind of feature pack for the Liberty Profile.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;While several specifications from the EE 7 umbrella have seen individual adoption, e.g. &lt;a href="https://jcp.org/en/jsr/detail?id=338"&gt;JPA 2.1&lt;/a&gt; through Hibernate 4.3 and &lt;a href="https://jcp.org/en/jsr/detail?id=340"&gt;Servlet 3.1&lt;/a&gt; / &lt;a href="https://jcp.org/en/jsr/detail?id=356"&gt;JSR-356 WebSockets&lt;/a&gt; through Tomcat 8 and Jetty 9, it is fair to say that Java EE 7 failed to enter the market as a platform overall. Ironically, the later-released JDK 8 got embraced in production rather quickly, even in EE land! So the state of the art as of mid 2015 is a vendor-supported Java EE 6 server running on JDK 8 in production&amp;hellip;&lt;/p&gt;&lt;p&gt;&lt;b&gt;Our consequence:&lt;/b&gt; Given the adoption levels of &lt;a href="https://spring.io/blog/2015/06/02/spring-4-and-java-8-adoption"&gt;Spring 4 and Java 8&lt;/a&gt;, we&amp;rsquo;ll raise the minimum to JDK 8+ in our Spring Framework 5 generation. However, due to the lack of Java EE 7 platform adoption, we&amp;rsquo;ll have to retain compatibility with the current generation of application servers: allowing for upcoming Spring 5 applications to be deployed to the JDK 8 based EE 6 servers commonly found in production - just like we do with Spring 4 already, but at least with the extra benefit of going JDK 8+ for our framework codebase and all of its core interfaces.&lt;/p&gt;&lt;p&gt;&lt;b&gt;P.S. (June 6):&lt;/b&gt;&lt;br/&gt;FWIW, I really appreciate &lt;a href="https://glassfish.java.net/"&gt;GlassFish&lt;/a&gt; and &lt;a href="http://wildfly.org/"&gt;WildFly&lt;/a&gt; as open source engineering efforts. Spring has dedicated support for both, and the &lt;a href="http://undertow.io/"&gt;Undertow&lt;/a&gt; HTTP server (under the WildFly umbrella) is a great fit for embedded deployments with Spring Boot. This doesn&amp;rsquo;t change the fact that the project owners (Oracle and Red Hat, respectively) refrain from supporting them, choosing to invest into WebLogic 12 and JBoss EAP 6 for production purposes instead. External support from the likes of Payara (for GlassFish) can only mitigate this to some degree, with large parts of the Java EE market bound to the vendor production offerings - all EE 6 based - in 2015.&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring Boot 1.2.4 released</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/06/04/spring-boot-1-2-4-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Stéphane Nicoll</name>
+    </author>
+    <id>tag:spring.io,2015-06-04:2155</id>
+    <updated>2015-06-04T11:46:00Z</updated>
+    <content type="html">&lt;p&gt;Spring Boot 1.2.4 has been released and is available now from &lt;a href="http://repo.spring.io/release"&gt;repo.spring.io&lt;/a&gt; and &lt;a href="http://search.maven.org/#search%7Cga%7C1%7Cg%3A%22org.springframework.boot%22"&gt;Maven Central&lt;/a&gt;. &lt;/p&gt;&lt;p&gt;This maintenance release includes a &lt;a href="https://github.com/spring-projects/spring-boot/issues?q=milestone%3A1.2.4"&gt;small number of fixes&lt;/a&gt; and is a recommended upgrade for all users.&lt;/p&gt;&lt;p&gt;The first milestone of Spring Boot 1.3 will be released in the coming days and adds &lt;a href="https://github.com/spring-projects/spring-boot/issues?q=milestone%3A1.3.0.M1"&gt;many exciting features&lt;/a&gt;. Stay tuned!&lt;/p&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-boot/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot/issues"&gt;Issues&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle"&gt;Documentation&lt;/a&gt;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>Apache Ambari meets Spring XD</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/06/02/apache-ambari-meets-spring-xd" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Janne Valkealahti</name>
+    </author>
+    <id>tag:spring.io,2015-06-02:2146</id>
+    <updated>2015-06-02T21:30:54Z</updated>
+    <content type="html">&lt;p&gt;We’re pleased to announce the first version of the &lt;a href="https://ambari.apache.org/"&gt;Apache Ambari&lt;/a&gt; plugin for &lt;a href="https://projects.spring.io/spring-xd/"&gt;Spring XD&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Ambari is a cluster provisioning tool to install and manage various Apache projects like HDFS, YARN, Zookeeper or Kafka. Ambari has a concept of a stack definition which is used by both Pivotal and Hortonworks. The stack definition is usually made up of components supported by the maintainer.&lt;/p&gt;&lt;p&gt;This Ambari integration adds support for provisioning Spring XD with &lt;a href="http://pivotal.io/big-data/pivotal-hd"&gt;Pivotal HD 3.0&lt;/a&gt; and &lt;a href="http://hortonworks.com/hdp/"&gt;Hortonworks HDP 2.2&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;Spring XD is not part of the main Ambari distribution for PHD or HDP. However, it is easy to extend an existing Ambari installation via a simple RPM installation which modifies existing stack definitions.&lt;/p&gt;&lt;p&gt;We&amp;rsquo;ve prepared &lt;a href="https://github.com/spring-projects/spring-xd-ambari/blob/master/src/docs/asciidoc/InstallingXDwithAmbari.asciidoc"&gt;installation instructions&lt;/a&gt; in our repo &lt;a href="https://github.com/spring-projects/spring-xd-ambari"&gt;Github spring-xd-ambari&lt;/a&gt; together with the source code for this plugin.&lt;/p&gt;&lt;p&gt;Spring XD on Pivotal HD 3.0 with external Redis as a message bus:&lt;br/&gt;&lt;img src="https://raw.githubusercontent.com/spring-projects/spring-xd-ambari/master/src/docs/asciidoc/images/xdphd.png" alt="PIC PHD" /&gt;&lt;/p&gt;&lt;p&gt;Spring XD on Hortonworks HDP 2.2 with Ambari hosted Kafka as a message bus:&lt;br/&gt;&lt;img src="https://raw.githubusercontent.com/spring-projects/spring-xd-ambari/master/src/docs/asciidoc/images/xdhdp.png" alt="PIC HDP" /&gt;&lt;/p&gt;&lt;p&gt;After cluster provisioning has been completed successfully, it is easy to connect to a running Spring XD cluster from the XD shell. A command script &lt;code&gt;/etc/springxd/conf/xd-shell.init&lt;/code&gt; is created automatically with correct settings that you can load into the XD shell.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint text"&gt;$ export JAVA_HOME=/usr/jdk64/jdk1.7.0_67&#xD;
+$ xd-shell&#xD;
+server-unknown:&amp;gt;script --file /etc/springxd/conf/xd-shell.init&#xD;
+admin config server http://ambari-2.localdomain:9393&#xD;
+Successfully targeted http://ambari-2.localdomain:9393&#xD;
+hadoop config fs --namenode hdfs://ambari-2.localdomain:8020&#xD;
+Script required 0.625 seconds to execute&#xD;
+&#xD;
+xd:&amp;gt;runtime containers&#xD;
+  Container Id                          Host                  IP Address      PID    Groups  Custom Attributes&#xD;
+  ------------------------------------  --------------------  --------------  -----  ------  -----------------&#xD;
+  44c34156-8b8a-4ada-ad46-e5d955b6f995  ambari-6.localdomain  172.16.101.146  6327&#xD;
+  d8273536-c688-4fdd-b370-6bc0f68bdc25  ambari-5.localdomain  172.16.101.145  31199&#xD;
+&#xD;
+&#xD;
+xd:&amp;gt;hadoop fs ls /&#xD;
+Found 9 items&#xD;
+drwxrwxrwx   - yarn      hadoop           0 2015-06-01 04:55 /app-logs&#xD;
+drwxr-xr-x   - gpadmin   gpadmin          0 2015-06-01 04:52 /hawq_data&#xD;
+drwxr-xr-x   - mapred    hdfs             0 2015-06-01 04:50 /mapred&#xD;
+drwxr-xr-x   - hdfs      hdfs             0 2015-06-01 04:50 /mr-history&#xD;
+drwxr-xr-x   - hdfs      hdfs             0 2015-06-01 04:51 /phd&#xD;
+drwxr-xr-x   - hdfs      hdfs             0 2015-06-01 04:52 /system&#xD;
+drwxrwxrwx   - hdfs      hdfs             0 2015-06-01 04:53 /tmp&#xD;
+drwxr-xr-x   - hdfs      hdfs             0 2015-06-01 04:53 /user&#xD;
+drwxrwxrwx   - spring-xd hdfs             0 2015-06-01 07:29 /xd
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Writing into HDFS works out of the box.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint text"&gt;xd:&amp;gt;stream create --name hdfstest --definition &amp;quot;time|hdfs&amp;quot; --deploy&#xD;
+xd:&amp;gt;stream destroy --name hdfstest&#xD;
+&#xD;
+xd:&amp;gt;hadoop fs ls --recursive true --dir /xd&#xD;
+drwxrwxrwx   - spring-xd hdfs          0 2015-06-01 07:29 /xd/hdfstest&#xD;
+-rw-r--r--   3 spring-xd hdfs        680 2015-06-01 07:29 /xd/hdfstest/hdfstest-0.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;h1&gt;&lt;a href="#springone-2gx-2015-is-around-the-corner" class="anchor" name="springone-2gx-2015-is-around-the-corner"&gt;&lt;/a&gt;SpringOne 2GX 2015 is around the corner!&lt;/h1&gt;&lt;p&gt;Book your place at &lt;a href="http://www.springone2gx.com"&gt;SpringOne2GX in Washington, DC soon&lt;/a&gt;. Super Early Bird Price expires June 12th! It&amp;rsquo;s simply the best opportunity to find out first hand all that&amp;rsquo;s going on and to provide direct feedback.&lt;/p&gt;&lt;h1&gt;&lt;a href="#discounts" class="anchor" name="discounts"&gt;&lt;/a&gt;Discounts&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;The Super Early Bird price tier ($300 discount) expires June 12th. The Early Bird price tier (June 13th - August 14th) is discounted $150.&lt;/li&gt;
+  &lt;li&gt;Register 4 and get the 5th pass free. Contact us with the names of your first 4 registrants for your complimentary pass code (conference admission only).&lt;/li&gt;
+  &lt;li&gt;Alumni, contact us for your discount code ($150 off any option).&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring XD 1.2 RC1 Released</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/06/02/spring-xd-1-2-rc1-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Mark Pollack</name>
+    </author>
+    <id>tag:spring.io,2015-06-02:2150</id>
+    <updated>2015-06-02T21:30:00Z</updated>
+    <content type="html">&lt;p&gt;On behalf of the Spring XD team, I am very pleased to announce that the Spring XD 1.2 Release Candidate is now &lt;a href="http://repo.spring.io/simple/libs-milestone-local/org/springframework/xd/spring-xd/1.2.0.RC1/spring-xd-1.2.0.RC1-dist.zip"&gt;available for download&lt;/a&gt;. You can also install using &lt;a href="http://docs.spring.io/spring-xd/docs/1.2.0.RC1/reference/html/#redhatcentos-installation"&gt;rpm&lt;/a&gt;&lt;/p&gt;&lt;p&gt;The 1.2 RC1 release includes bug fixes as well as several new features and enhancements.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Apache Ambari plugin to automate the deployment of Spring XD to a Hadoop cluster. Read more in the &lt;a href="https://spring.io/blog/2015/06/02/apache-ambari-meets-spring-xd"&gt;release blog for the plugin&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;A new Analytics tab in the UI that allows you to easily view gauges, counters, field-value counters and aggregate counters.&lt;/li&gt;
+  &lt;li&gt;Performance improvements for the Kafka Message Bus that places it on par with the performance benchmark applications that ship with Kafka. An upcoming blog will discuss XD performance in more detail&lt;/li&gt;
+  &lt;li&gt;Improved HA support for the Rabbit Message Bus, XD containers connect to the Rabbit Broker that hosts the queue that is being consumed&lt;/li&gt;
+  &lt;li&gt;Support for the Sqoop metastore and other &lt;a href="https://jira.spring.io/browse/XD-2938"&gt;Sqoop integration improvements&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Support for multiple topics in the Kafka source.&lt;/li&gt;
+  &lt;li&gt;Add rolloverTime option to HDFS sink&lt;/li&gt;
+  &lt;li&gt;Support incremental data import with jdbchdfs job&lt;/li&gt;
+  &lt;li&gt;Ability to tap Spark streaming processors&lt;/li&gt;
+  &lt;li&gt;Support arbitrary JavaMail properties in the mail source&lt;/li&gt;
+  &lt;li&gt;Several new source/sink modules
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="https://github.com/spring-projects/spring-xd-modules/tree/master/videocap"&gt;Video Capture source&lt;/a&gt; (community contributed)&lt;/li&gt;
+    &lt;li&gt;FTP source and sink (community contributed)&lt;/li&gt;
+    &lt;li&gt;&lt;a href="https://github.com/spring-projects/spring-xd-modules/tree/master/load-generator-source"&gt;load-generator&lt;/a&gt; source and &lt;a href="https://github.com/spring-projects/spring-xd-modules/tree/master/throughput"&gt;throughput&lt;/a&gt; sink&lt;/li&gt;
+    &lt;li&gt;&lt;a href="https://github.com/spring-projects/spring-xd-modules/tree/master/xslt-transformer"&gt;xslt-transformer&lt;/a&gt; (community contributed)&lt;/li&gt;
+    &lt;li&gt;&lt;a href="https://github.com/spring-projects/spring-xd-modules/tree/master/spring-xd-lang-detector"&gt;language classifier processor&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;&lt;/li&gt;
+  &lt;li&gt;The gpfdist sink is now included in the XD distribution&lt;/li&gt;
+  &lt;li&gt;Performance improvements for reactor based processor&lt;/li&gt;
+  &lt;li&gt;Support for Oracle as a batch repository&lt;/li&gt;
+  &lt;li&gt;Change from log4j to Logback logging framework&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;The full list of &lt;a href="https://jira.spring.io/jira/secure/ReleaseNote.jspa?projectId=11401&amp;version=14959"&gt;issues fixed for 1.2 RC1&lt;/a&gt; is available in JIRA.&lt;/p&gt;&lt;p&gt;Feedback is very important, so please get in touch with questions and comments via&lt;br/&gt;* &lt;a href="http://stackoverflow.com/questions/tagged/spring-xd"&gt;StackOverflow&lt;/a&gt; &lt;code&gt;spring-xd&lt;/code&gt; tag&lt;br/&gt;* &lt;a href="https://jira.spring.io/browse/XD/?selectedTab=com.atlassian.jira.jira-projects-plugin:summary-panel"&gt;Spring JIRA&lt;/a&gt; or &lt;a href="https://github.com/spring-projects/spring-xd/issues"&gt;GitHub Issues&lt;/a&gt;&lt;/p&gt;&lt;h1&gt;&lt;a href="#springone-2gx-2015-is-around-the-corner" class="anchor" name="springone-2gx-2015-is-around-the-corner"&gt;&lt;/a&gt;SpringOne 2GX 2015 is around the corner!&lt;/h1&gt;&lt;p&gt;Book your place at &lt;a href="http://www.springone2gx.com"&gt;SpringOne2GX in Washington, DC soon&lt;/a&gt;. Super Early Bird Price expires June 12th! It&amp;rsquo;s simply the best opportunity to find out first hand all that&amp;rsquo;s going on and to provide direct feedback.&lt;/p&gt;&lt;h1&gt;&lt;a href="#discounts" class="anchor" name="discounts"&gt;&lt;/a&gt;Discounts&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;The Super Early Bird price tier ($300 discount) expires June 12th. The Early Bird price tier (June 13th - August 14th) is discounted $150.&lt;/li&gt;
+  &lt;li&gt;Register 4 and get the 5th pass free. Contact us with the names of your first 4 registrants for your complimentary pass code (conference admission only).&lt;/li&gt;
+  &lt;li&gt;Alumni, contact us for your discount code ($150 off any option).&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring 4 and Java 8 adoption</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/06/02/spring-4-and-java-8-adoption" />
+    <category term="news" label="News and Events" />
+    <author>
+      <name>Juergen Hoeller</name>
+    </author>
+    <id>tag:spring.io,2015-06-02:2151</id>
+    <updated>2015-06-02T21:25:30Z</updated>
+    <content type="html">&lt;p&gt;As Josh mentioned in &amp;ldquo;This Week in Spring&amp;rdquo; already, Eugen Paraschiv recently did a noteworthy survey on the adoption of Spring 4 and Java 8 as well as Spring Boot:&lt;br/&gt;&lt;a href="http://www.baeldung.com/java-8-spring-4-and-spring-boot-adoption"&gt;http://www.baeldung.com/java-8-spring-4-and-spring-boot-adoption&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Those are interesting numbers for us. Within the Spring universe, Java 8 adoption seems to be approaching 40%! And in terms of Spring Framework versions, Spring 4 is at 65% already, which I&amp;rsquo;m really happy to see. Even taking into account that a large part of the corporate use of Spring might not be represented in those numbers, that&amp;rsquo;s a great trend. And Pivotal&amp;rsquo;s early production support for Spring 4 on JDK 8 certainly helped in the corporate world as well.&lt;/p&gt;&lt;p&gt;It&amp;rsquo;s equally great to see that a third of the responders are using Spring Boot in the meantime. In other words, half of the Spring 4 userbase is also using Spring Boot, which is impressive for such a young project. Spring Boot&amp;rsquo;s immediate inclusion in our Spring I/O Platform with full production support last year might have boosted its adoption quite a bit. But even more importantly, it simply seems to be a fit for today&amp;rsquo;s application development challenges&amp;hellip;&lt;/p&gt;</content>
+  </entry>
+  <entry>
+    <title>This Week in Spring  - June 2, 2015</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/06/02/this-week-in-spring-june-2-2015" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2015-06-02:2148</id>
+    <updated>2015-06-02T17:33:22Z</updated>
+    <content type="html">&lt;p&gt;Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! This week I&amp;rsquo;m in New York City in advance of QCon NYC next week talking to customers and working with the local Pivotal Labs team. If you&amp;rsquo;re around &lt;a href="mailto:jlong@pivotal.io"&gt;be sure to say hi&lt;/a&gt; and let&amp;rsquo;s talk code. &lt;/p&gt;&lt;p&gt;So, as usual, we&amp;rsquo;ve got a lot to cover so let&amp;rsquo;s get to it. &lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Our pal Nicolas Frankel&amp;rsquo;s put together an awesome post on &lt;a href="http://blog.frankel.ch/spring-configuration-modularization-for-integration-testing"&gt;modularizing configuration for integration testing with Spring&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+  &lt;li&gt;Spring Cloud co-lead Spencer Gibb just announced &lt;a href="https://spring.io/blog/2015/05/27/spring-cloud-consul-1-0-0-m1-available-now"&gt;that Spring Cloud Consul 1.0.0.M1 is now available&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Don&amp;rsquo;t miss Jamie O’Meara&amp;rsquo;s upcoming webinar on &lt;a href="https://spring.io/blog/2015/05/28/webinar-ci-on-the-cloud-with-jenkins-spring-and-cloud-foundry"&gt;continuous integration with Jenkins, Spring and Cloud Foundry&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Check out Phil Dutson&amp;rsquo;s &lt;a href="https://spring.io/blog/2015/05/28/webinar-jstl-to-thymeleaf-transitioning-your-template"&gt;upcoming webinar on moving &lt;code&gt;.jsp&lt;/code&gt; and JSTL pages to Thymeleaf&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Integration lead Gary Russell &lt;a href="https://spring.io/blog/2015/05/28/spring-integration-4-2-milestone-1-is-available"&gt;just announced Spring Integration 4.2M1 is now available&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;check out the replay of Marten Deinum&amp;rsquo;s &lt;em&gt;awesome&lt;/em&gt; talk that looks &lt;a href="https://spring.io/blog/2015/05/28/webinar-replay-improving-your-legacy-application-with-spring"&gt;at how to modernize legacy applications with Spring &lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Janne Valkealahti just announced that &lt;a href="https://spring.io/blog/2015/06/02/spring-statemachine-1-0-0-m2-released"&gt;Spring Statemachine 1.0.0.M2 has been released&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;our pal Eugen Paraschiv did an interesting &lt;a href="http://www.baeldung.com/java-8-spring-4-and-spring-boot-adoption"&gt;survey on Spring and Java 8&amp;rsquo;s latest adoption numbers &lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;our pal Rafal Borowiec did a great post on &lt;a href="http://www.javacodegeeks.com/2015/05/groovier-spring-boot-integration-testing.html"&gt;using the amazing Groovy language to simplify Integration testing&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Yoichi Kikuchi put together a Japanese-language look at &lt;a href="http://yo1000.hateblo.jp/entry/2015/05/27/120647"&gt;using Spring Boot and MyBatis &lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Kazuhira put together a Japanese-language post on using &lt;a href="http://d.hatena.ne.jp/Kazuhira/20150530/1432996038"&gt;Hibernate, the Spring Cache abstraction, and RedHat&amp;rsquo;s Infinispan&lt;/a&gt; distributed data grid together&lt;/li&gt;
+  &lt;li&gt;The JavaTechPoint blog has a &lt;em&gt;super&lt;/em&gt; simple &lt;a href="http://www.javatechpoint.com/spring-mvc/hello-world-spring-mvc-4-with-spring-boot-framework/"&gt;look at using Spring Boot&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Christoph Deppisch put together a nice post on &lt;a href="https://www.voxxed.com/blog/2015/05/apache-camel-integration-testing-part-2/"&gt;testing Apache Camel solutions with Spring&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Arvind Rai put together a nice look &lt;a href="http://www.concretepage.com/spring-4/spring-4-quartz-2-scheduler-integration-annotation-example-using-javaconfig"&gt;at using Spring Quartz 2 support with Java configuration&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
+  <entry>
+    <title>First Milestone of Spring Data Release Train Gosling Available</title>
+    <link rel="alternate" href="https://spring.io/blog/2015/06/02/first-milestone-of-spring-data-release-train-gosling-available" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Christoph Strobl</name>
+    </author>
+    <id>tag:spring.io,2015-06-02:2147</id>
+    <updated>2015-06-02T16:11:00Z</updated>
+    <content type="html">&lt;p&gt;On behalf of the Spring Data team, I am happy to announce the first milestone of the Spring Data release train &lt;a href="https://github.com/spring-projects/spring-data-commons/wiki/Release-Train-Gosling"&gt;Gosling&lt;/a&gt;. The release ships with &lt;a href="https://jira.spring.io/issues/?filter=14962"&gt;164 tickets&lt;/a&gt; fixed as well as &lt;a href="https://github.com/spring-projects/spring-data-keyvalue"&gt;Spring Data KeyValue&lt;/a&gt; joining the Spring Data release train with an initial milestone. The highlights of the release include:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Spring 4.1 as a new minimum baseline.&lt;/li&gt;
+  &lt;li&gt;Simplified support for adding custom methods to all repositories throughout the individual modules (see this &lt;a href="https://github.com/spring-projects/spring-data-examples/tree/master/jpa/example/src/main/java/example/springdata/jpa/customall"&gt;example&lt;/a&gt;).&lt;/li&gt;
+  &lt;li&gt;Declarative ad-hoc JPA 2.1 fetch graph declarations via &lt;code&gt;@EntityGraph&lt;/code&gt; on repository methods.&lt;/li&gt;
+  &lt;li&gt;Gemfire 8.1 support including multi-index definition operations.&lt;/li&gt;
+  &lt;li&gt;SpEL expressions in &lt;code&gt;@Query&lt;/code&gt; as well as support for &lt;code&gt;$geoIntersects&lt;/code&gt; for MongoDB.&lt;/li&gt;
+  &lt;li&gt;Enhanced &lt;code&gt;ZSET&lt;/code&gt; support for Spring Data Redis including &lt;code&gt;ZRANGEBYLEX&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;A Spring Data REST module shipping the HAL browser as well as support for conditional GETs.&lt;/li&gt;
+  &lt;li&gt;Map-backed repositories (see this &lt;a href="https://github.com/spring-projects/spring-data-examples/tree/master/map"&gt;example&lt;/a&gt;)&lt;/li&gt;
+  &lt;li&gt;Support for Neo4J 2.2.&lt;/li&gt;
+  &lt;li&gt;Support for derived &lt;code&gt;deleteBy...&lt;/code&gt; queries and bulk updates in Spring Data Elasticsearch.&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Here are the participating modules:&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Spring Data Commons 1.11 M1 - &lt;a href="https://repo.spring.io/libs-milestone/org/springframework/data/spring-data-commons/1.11.0.M1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/commons/docs/1.11.0.M1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/commons/docs/1.11.0.M1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/commons/docs/1.11.0.M1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data JPA 1.9 M1 - &lt;a href="https://repo.spring.io/libs-milestone/org/springframework/data/spring-data-jpa/1.9.0.M1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/jpa/docs/1.9.0.M1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/jpa/docs/1.9.0.M1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/jpa/docs/1.9.0.M1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data MongoDB 1.8 M1 - &lt;a href="https://repo.spring.io/libs-milestone/org/springframework/data/spring-data-mongodb/1.8.0.M1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/mongodb/docs/1.8.0.M1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/mongodb/docs/1.8.0.M1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/mongodb/docs/1.8.0.M1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Neo4j 3.4 M1 - &lt;a href="https://repo.spring.io/libs-milestone/org/springframework/data/spring-data-neo4j/3.4.0.M1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/neo4j/docs/3.4.0.M1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/neo4j/docs/3.4.0.M1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/neo4j/docs/3.4.0.M1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Solr 1.5 M1 - &lt;a href="https://repo.spring.io/libs-milestone/org/springframework/data/spring-data-solr/1.5.0.M1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/solr/docs/1.5.0.M1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/solr/docs/1.5.0.M1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/solr/docs/1.5.0.M1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Couchbase 1.4 M1 - &lt;a href="https://repo.spring.io/libs-milestone/org/springframework/data/spring-data-couchbase/1.4.0.M1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/couchbase/docs/1.4.0.M1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/couchbase/docs/1.4.0.M1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/couchbase/docs/1.4.0.M1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Cassandra 1.3 M1 - &lt;a href="https://repo.spring.io/libs-milestone/org/springframework/data/spring-data-cassandra/1.3.0.M1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/cassandra/docs/1.3.0.M1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/cassandra/docs/1.3.0.M1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/cassandra/docs/1.3.0.M1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Elasticsearch 1.3 M1 - &lt;a href="https://repo.spring.io/libs-milestone/org/springframework/data/spring-data-elasticsearch/1.3.0.M1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/elasticsearch/docs/1.3.0.M1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/elasticsearch/docs/1.3.0.M1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/elasticsearch/docs/1.3.0.M1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Gemfire 1.7 M1 - &lt;a href="https://repo.spring.io/libs-milestone/org/springframework/data/spring-data-gemfire/1.7.0.M1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/gemfire/docs/1.7.0.M1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/gemfire/docs/1.7.0.M1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/gemfire/docs/1.7.0.M1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data Redis 1.6 M1 - &lt;a href="https://repo.spring.io/libs-milestone/org/springframework/data/spring-data-redis/1.6.0.M1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/redis/docs/1.6.0.M1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/redis/docs/1.6.0.M1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/redis/docs/1.6.0.M1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data REST 2.4 M1 - &lt;a href="https://repo.spring.io/libs-milestone/org/springframework/data/spring-data-rest-webmvc/2.4.0.M1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/rest/docs/2.4.0.M1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/rest/docs/2.4.0.M1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/rest/docs/2.4.0.M1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Spring Data KeyValue 1.0 M1 - &lt;a href="https://repo.spring.io/libs-milestone/org/springframework/data/spring-data-keyvalue/1.0.0.M1"&gt;Artifacts&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/keyvalue/docs/1.0.0.M1/api"&gt;JavaDocs&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/keyvalue/docs/1.0.0.M1/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="http://docs.spring.io/spring-data/keyvalue/docs/1.0.0.M1/changelog.txt"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;p&gt;Be sure to check out the &lt;a href="https://github.com/spring-projects/spring-data-examples"&gt;already updated examples&lt;/a&gt;. Get in touch via &lt;a href="https://twitter.com/springdata"&gt;Twitter&lt;/a&gt;, &lt;a href="http://stackoverflow.com/questions/tagged/spring-data"&gt;StackOverflow&lt;/a&gt; or &lt;a href="https://jira.spring.io/"&gt;JIRA&lt;/a&gt;. We&amp;rsquo;re looking forward to your feedback!&lt;/p&gt;
+&lt;hr/&gt;&lt;h2&gt;&lt;a href="#springone-2gx-2015-is-around-the-corner" class="anchor" name="springone-2gx-2015-is-around-the-corner"&gt;&lt;/a&gt;SpringOne 2GX 2015 is around the corner!&lt;/h2&gt;&lt;p&gt;Book your place at &lt;a href="http://www.springone2gx.com"&gt;SpringOne2GX in Washington, DC soon&lt;/a&gt;. Super Early Bird Price expires June 12th! It&amp;rsquo;s simply the best opportunity to find out first hand all that&amp;rsquo;s going on and to provide direct feedback. &lt;/p&gt;&lt;h2&gt;&lt;a href="#discounts" class="anchor" name="discounts"&gt;&lt;/a&gt;Discounts&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;The Super Early Bird price tier ($300 discount) expires June 12th. The Early Bird price tier (June 13th - August 14th) is discounted $150.&lt;/li&gt;
+  &lt;li&gt;Register 4 and get the 5th pass free. Contact us with the names of your first 4 registrants for your complimentary pass code (conference admission only).&lt;/li&gt;
+  &lt;li&gt;Alumni, contact us for your discount code ($150 off any option).&lt;/li&gt;
+&lt;/ul&gt;</content>
+  </entry>
   <entry>
     <title>Spring Statemachine 1.0.0.M2 Released</title>
     <link rel="alternate" href="https://spring.io/blog/2015/06/02/spring-statemachine-1-0-0-m2-released" />
@@ -335,299 +536,5 @@ public class SampleApp2 {&#xD;
     <id>tag:spring.io,2015-05-19:2126</id>
     <updated>2015-05-19T22:36:53Z</updated>
     <content type="html">&lt;p&gt;We are pleased to announce that Spring Batch 3.0.4.RELEASE is now available via Maven Central, Github and the SpringSource download repository. This is the 4th maintenance release for the 3.0.x branch of Spring Batch and addresses a number of bugs and a few minor enhancements. Many thanks to all of those who submitted the many &lt;a href="https://github.com/springsource/spring-batch/pulls"&gt;pull requests&lt;/a&gt; that went into this release.&lt;/p&gt;&lt;p&gt;&lt;a href="http://spring.io/projects/spring-batch"&gt;Spring Batch Home&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-batch"&gt;Source on GitHub&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-batch/"&gt;Reference Documentation&lt;/a&gt;&lt;/p&gt;&lt;p&gt;We look forward to your feedback in &lt;a href="https://jira.spring.io/browse/BATCH"&gt;Jira&lt;/a&gt;, &lt;a href="http://stackoverflow.com/questions/tagged/spring-batch"&gt;StackOverflow&lt;/a&gt;, or to me directly via Twitter &lt;a href="twitter.com/michaelminella"&gt;@michaelminella&lt;/a&gt;.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Social 1.1.2 Released</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/05/19/spring-social-1-1-2-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Craig Walls</name>
-    </author>
-    <id>tag:spring.io,2015-05-19:2125</id>
-    <updated>2015-05-19T20:03:16Z</updated>
-    <content type="html">&lt;p&gt;Dear Spring Community,&lt;/p&gt;&lt;p&gt;I&amp;rsquo;m pleased to announce the availability of Spring Social 1.1.2.RELEASE. This includes Spring Social&amp;rsquo;s core, web, security, and config modules. This release fixes a dependency issue from last week&amp;rsquo;s 1.1.1.RELEASE.&lt;/p&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-social/core.html"&gt;Project Site&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-social/docs/1.1.2.RELEASE/reference/htmlsingle/"&gt;Reference&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-social/docs/1.1.2.RELEASE/apidocs/"&gt;JavaDoc&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Philosophical Architecture in Grails</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/05/19/springone2gx-2014-replay-philosophical-architecture-in-grails" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-05-20:2131</id>
-    <updated>2015-05-19T17:02:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
-&lt;p&gt;Speaker: David Dawson, Simplicity Itself &lt;/p&gt;
-&lt;p&gt;G&amp;amp;G Special Topics &lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/s2gx-philosophicalarchitecture"&gt;http://www.slideshare.net/SpringCentral/s2gx-philosophicalarchitecture&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Software development is hard. Life is hard. We try to keep up with a changing world, and it's hard. Where though, does the problem lie? In this talk, David, CEO at Simplicity Itself, will describe a different way of approaching the problem of software development, a different way of trying to keep up with a changing world. This is not a soft talk, all opinions are backed up by cold hard code in a running Grails application, showing how a change in the way you think can radically change your software.&lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-&lt;p&gt;&#xD;
-  &lt;iframe width="420" height="315" src="https://www.youtube.com/embed/nx8XMY7evbA" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
-&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Groovy Vampires: Combining Groovy, REST, NoSQL, and more</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/05/19/springone2gx-2014-replay-groovy-vampires-combining-groovy-rest-nosql-and-more" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-05-19:2130</id>
-    <updated>2015-05-19T16:52:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
-&lt;p&gt;Speaker: Kenneth Kousen &lt;/p&gt;
-&lt;p&gt;G&amp;amp;G Special Topics &lt;/p&gt;
-&lt;p&gt;Slides: &lt;a href="http://www.slideshare.net/SpringCentral/groovy-vampires"&gt;http://www.slideshare.net/SpringCentral/groovy-vampires&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;If a book as horrible as Twilight can sell millions of copies and be made into an even worse movie, how many copies can a book with Groovy vampires sell? (Spoiler: Not as many.) Yes, this topic may be silly, but the technologies used (Groovy, Ratpack, MongoDB, Grails, REST) are (un)deadly serious. &lt;/p&gt;
-&lt;p&gt;&amp;nbsp;&lt;/p&gt;
-&lt;p&gt;&#xD;
-  &lt;iframe width="560" height="315" src="https://www.youtube.com/embed/hwH1PK94PKw" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
-&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>SpringOne2GX 2014 Replay: Grails Plugin Testing Strategies</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/05/19/springone2gx-2014-replay-grails-plugin-testing-strategies" />
-    <category term="news" label="News and Events" />
-    <author>
-      <name>Pieter Humphrey</name>
-    </author>
-    <id>tag:spring.io,2015-05-19:2128</id>
-    <updated>2015-05-19T16:46:00Z</updated>
-    <content type="html">&lt;p&gt;Recorded at SpringOne2GX 2014. &lt;/p&gt;
-&lt;p&gt;Speaker: Baruch Sadogursky, JFrog &lt;/p&gt;
-&lt;p&gt;Slides: No slides, Baruch is 100% demo, baby&lt;/p&gt;
-&lt;p&gt;G&amp;amp;G Special Topics&lt;/p&gt;
-&lt;p&gt; Maintaining Grails plugins can be a real challenge given the high expectations and demands. Apart from supporting many users, you're tasked with making sure that the plugin is compatible with a range of Grails versions - both old and new. Your plugin must also be compatible with multiple development environments (OSs, SDKs, etc,) and play nice with the wealth of other plugins that exist in the ecosystem. How can we make sure that all these high standards are met? Testing, and lot's of it!&lt;/p&gt;
-&lt;p&gt;&#xD;
-  &lt;iframe width="420" height="315" src="https://www.youtube.com/embed/NxWw4Zacg-c" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;&#xD;
-&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Testing an Angular Application: Angular JS and Spring Security Part VIII</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/05/19/testing-an-angular-application-angular-js-and-spring-security-part-viii" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Dave Syer</name>
-    </author>
-    <id>tag:spring.io,2015-04-26:2097</id>
-    <updated>2015-05-19T15:25:00Z</updated>
-    <content type="html">&lt;p&gt;In this article we continue &lt;a href="https://spring.io/blog/2015/05/13/modularizing-the-client-angular-js-and-spring-security-part-vii" title="Seventh Article in the Series"&gt;our discussion&lt;/a&gt; of how to use &lt;a href="http://projects.spring.io/spring-security"&gt;Spring Security&lt;/a&gt; with &lt;a href="http://angularjs.org"&gt;Angular JS&lt;/a&gt; in a &amp;ldquo;single page application&amp;rdquo;. Here we show how to write and run unit tests for the client-side code using the Javascript test framework &lt;a href="http://jasmine.github.io/2.0/introduction.html"&gt;Jasmine&lt;/a&gt;. This is the eighth in a series of articles, and you can catch up on the basic building blocks of the application or build it from scratch by reading the &lt;a href="https://spring.io/blog/2015/01/12/spring-and-angular-js-a-secure-single-page-application" title="First Article in the Series"&gt;first article&lt;/a&gt;, or you can just go straight to the &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/basic"&gt;source code in Github&lt;/a&gt; (the same source code as Part I, but with tests now added). This article actually has very little code using Spring or Spring Security, but it covers the client-side testing in a way that might not be so easy to find in the usual Javascript community resources, and one which we feel will be comfortable for the majority of Spring users.&lt;/p&gt;&lt;p&gt;As with the rest of this series, the build tools are typical for Spring users, and not so much for experienced front-end developers. Thus we look for solutions that can be used from a Java IDE, and on the command line with familiar Java build tools. If you already know about Jasmine and Javascript testing, and you are happy using a Node.js based toolchain (e.g. &lt;code&gt;npm&lt;/code&gt;, &lt;code&gt;grunt&lt;/code&gt; etc.), then you probably can skip this article completely. If you are more comfortable in Eclipse or IntelliJ, and would prefer to use the same tools for your front end as for the back end, then this article will be of interest. When we need a command line (e.g. for continuous integration), we use Maven in the examples here, but Gradle users will probably find the same code easy to integrate.&lt;/p&gt;
-&lt;blockquote&gt;&lt;p&gt;Reminder: if you are working through this section with the sample application, be sure to clear your browser cache of cookies and HTTP Basic credentials. In Chrome the best way to do that for a single server is to open a new incognito window.&lt;/p&gt;
-&lt;/blockquote&gt;&lt;h2&gt;&lt;a href="#writing-a-specification-in-jasmine" class="anchor" name="writing-a-specification-in-jasmine"&gt;&lt;/a&gt;Writing a Specification in Jasmine&lt;/h2&gt;&lt;p&gt;Our &amp;ldquo;home&amp;rdquo; controller in the &amp;ldquo;basic&amp;rdquo; application is very simple, so it won&amp;rsquo;t take a lot to test it thoroughly. Here&amp;rsquo;s a reminder of the code (&lt;code&gt;hello.js&lt;/code&gt;):&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint javascript"&gt;angular.module(&amp;#39;hello&amp;#39;, []).controller(&amp;#39;home&amp;#39;, function($scope, $http) {&#xD;
-  $http.get(&amp;#39;resource/&amp;#39;).success(function(data) {&#xD;
-    $scope.greeting = data;&#xD;
-  })&#xD;
-});
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The main challenge we face is to provide the &lt;code&gt;$scope&lt;/code&gt; and &lt;code&gt;$http&lt;/code&gt; objects in the test, so we can make assertions about how they are used in the controller. Actually, even before we face that challenge we need to be able to create a controller instance, so we can test what happens when it loads. Here&amp;rsquo;s how you can do that.&lt;/p&gt;&lt;p&gt;Create a new file &lt;code&gt;spec.js&lt;/code&gt; and put it in &amp;ldquo;src/test/resources/static/js&amp;rdquo;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint javascript"&gt;describe(&amp;quot;App&amp;quot;, function() {&#xD;
-&#xD;
-	beforeEach(module(&amp;#39;hello&amp;#39;));&#xD;
-&#xD;
-    var $controller;&#xD;
-	beforeEach(inject(function($injector) {&#xD;
-		$controller = $injector.get(&amp;#39;$controller&amp;#39;);&#xD;
-	}));&#xD;
-&#xD;
-	it(&amp;quot;loads a controller&amp;quot;, function() {&#xD;
-		var controller = $controller(&amp;#39;home&amp;#39;)&#xD;
-	});&#xD;
-&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;In this very basic test suite we have 3 important elements:&lt;/p&gt;
-&lt;ol&gt;
-  &lt;li&gt;&lt;p&gt;We &lt;code&gt;describe()&lt;/code&gt; the thing that is being tested (the &amp;ldquo;App&amp;rdquo; in this case) with a function.&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;Inside that function we provide a couple of &lt;code&gt;beforeEach()&lt;/code&gt; callbacks, one of which loads the Angular module &amp;ldquo;hello&amp;rdquo;, and the other of which creates a factory for controllers, which we call &lt;code&gt;$controller&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;Behaviour is expressed through a call to &lt;code&gt;it()&lt;/code&gt;, where we state in words what the expectation is, and then provide a function that makes assertions.&lt;/p&gt;&lt;/li&gt;
-&lt;/ol&gt;&lt;p&gt;The test function here is so trivial it actually doesn&amp;rsquo;t even make assertions, but it does create an instance of the &amp;ldquo;home&amp;rdquo; controller, so if that fails then the test will fail.&lt;/p&gt;
-&lt;blockquote&gt;&lt;p&gt;NOTE: &amp;ldquo;src/test/resources/static/js&amp;rdquo; is a logical place for test code in a Java application, although a case could be made for &amp;ldquo;src/test/javascript&amp;rdquo;. We will see later why it makes sense to put it in the test classpath, though (indeed if you are used to Spring Boot conventions you may already see why).&lt;/p&gt;
-&lt;/blockquote&gt;&lt;p&gt;Now we need a driver for this Javascript code, in the form of an HTML page that we coudl load in a browser. Create a file called &amp;ldquo;test.html&amp;rdquo; and put it in &amp;ldquo;src/test/resources/static&amp;rdquo;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint html"&gt;&amp;lt;!doctype html&amp;gt;&#xD;
-&amp;lt;html&amp;gt;&#xD;
-&amp;lt;head&amp;gt;&#xD;
-&#xD;
-&amp;lt;title&amp;gt;Jasmine Spec Runner&amp;lt;/title&amp;gt;&#xD;
-&amp;lt;link rel=&amp;quot;stylesheet&amp;quot; type=&amp;quot;text/css&amp;quot;&#xD;
-  href=&amp;quot;/webjars/jasmine/2.0.0/jasmine.css&amp;quot;&amp;gt;&#xD;
-&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;/webjars/jasmine/2.0.0/jasmine.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&#xD;
-&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&#xD;
-  src=&amp;quot;/webjars/jasmine/2.0.0/jasmine-html.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&#xD;
-&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;/webjars/jasmine/2.0.0/boot.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&#xD;
-&#xD;
-&amp;lt;!-- include source files here... --&amp;gt;&#xD;
-&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;/js/angular-bootstrap.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&#xD;
-&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;/js/hello.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&#xD;
-&#xD;
-&amp;lt;!-- include spec files here... --&amp;gt;&#xD;
-&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&#xD;
-  src=&amp;quot;/webjars/angularjs/1.3.8/angular-mocks.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&#xD;
-&amp;lt;script type=&amp;quot;text/javascript&amp;quot; src=&amp;quot;/js/spec.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;&#xD;
-&#xD;
-&amp;lt;/head&amp;gt;&#xD;
-&#xD;
-&amp;lt;body&amp;gt;&#xD;
-&amp;lt;/body&amp;gt;&#xD;
-&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The HTML is content free, but it loads some Javascript, and it will have a UI once the scripts all run.&lt;/p&gt;&lt;p&gt;First we load the required Jasmine components from &lt;code&gt;/webjars/**&lt;/code&gt;. The 4 files that we load are just boilerplate - you can do the same thing for any application. To make those available at runtime in a test we will need to add the Jasmine dependency to our &amp;ldquo;pom.xml&amp;rdquo;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;dependency&amp;gt;&#xD;
-  &amp;lt;groupId&amp;gt;org.webjars&amp;lt;/groupId&amp;gt;&#xD;
-  &amp;lt;artifactId&amp;gt;jasmine&amp;lt;/artifactId&amp;gt;&#xD;
-  &amp;lt;version&amp;gt;2.0.0&amp;lt;/version&amp;gt;&#xD;
-  &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;&#xD;
-&amp;lt;/dependency&amp;gt;&#xD;
- ```&#xD;
-&#xD;
-Then we come to the application-specific code. The main source code for our front end is &amp;quot;hello.js&amp;quot; so we have to load that, and also its dependencies in the form of &amp;quot;angular-bootstrap.js&amp;quot; (the latter is created by the wro4j maven plugin, so you need to run `mvn package` once successfully before it is loadable).&#xD;
-&#xD;
-Finally we need the &amp;quot;spec.js&amp;quot; that we jsut wrote, and its dependencies (any that are not already included the the other scripts), which for an Angular application will nearly always include the &amp;quot;angular-mocks.js&amp;quot;. We load it from webjars, so you will also need to add that dependency to &amp;quot;pom.xml&amp;quot;:&#xD;
-
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;dependency&gt;&lt;br/&gt; &lt;groupId&gt;org.webjars&lt;/groupId&gt;&lt;br/&gt; &lt;artifactId&gt;angularjs&lt;/artifactId&gt;&lt;br/&gt; &lt;version&gt;1.3.8&lt;/version&gt;&lt;br/&gt; &lt;scope&gt;test&lt;/scope&gt;&lt;br/&gt;&lt;/dependency&gt;&lt;br/&gt; ```&lt;/p&gt;
-&lt;blockquote&gt;&lt;p&gt;NOTE: The angularjs webjar was already included as a dependency of the wro4j plugin, so that it could build the &amp;ldquo;angular-bootstrap.js&amp;rdquo;. This is going to be used in a different build step, so we need it again.&lt;/p&gt;
-&lt;/blockquote&gt;&lt;h2&gt;&lt;a href="#running-the-specs" class="anchor" name="running-the-specs"&gt;&lt;/a&gt;Running the Specs&lt;/h2&gt;&lt;p&gt;To run our &amp;ldquo;test.html&amp;rdquo; code we need a tiny application (e.g. in &amp;ldquo;src/test/java/test&amp;rdquo;):&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint java"&gt;@SpringBootApplication&#xD;
-@Controller&#xD;
-public class TestApplication {&#xD;
-&#xD;
-	@RequestMapping(&amp;quot;/&amp;quot;)&#xD;
-	public String home() {&#xD;
-		return &amp;quot;forward:/test.html&amp;quot;;&#xD;
-	}&#xD;
-&#xD;
-	public static void main(String[] args) {&#xD;
-		new SpringApplicationBuilder(TestApplication.class).properties(&#xD;
-				&amp;quot;server.port=9999&amp;quot;, &amp;quot;security.basic.enabled=false&amp;quot;).run(args);&#xD;
-	}&#xD;
-&#xD;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The &lt;code&gt;TestApplication&lt;/code&gt; is pure boilerplate: all applications could run tests the same way. You can run it in your IDE and visit &lt;a href="http://localhost:9999"&gt;http://localhost:9999&lt;/a&gt; to see the Javascript running. The one &lt;code&gt;@RequestMapping&lt;/code&gt; we provided just makes the home page display out test HTML. All (one) tests should be green.&lt;/p&gt;&lt;p&gt;Your developer workflow from here would be to make a change to Javascript code and reload the test application in your browser to run the tests. So simple!&lt;/p&gt;&lt;h2&gt;&lt;a href="#improving-the-unit-test-mocking-http-backend" class="anchor" name="improving-the-unit-test-mocking-http-backend"&gt;&lt;/a&gt;Improving the Unit Test: Mocking HTTP Backend&lt;/h2&gt;&lt;p&gt;To improve the spec to production grade we need to actually assert something about what happens when the controller loads. Since it makes a call to &lt;code&gt;$http.get()&lt;/code&gt; we need to mock that call to avoid having to run the whole application just for a unit test. To do that we use the Angular &lt;code&gt;$httpBackend&lt;/code&gt; (in &amp;ldquo;spec.js&amp;rdquo;):&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint javascript"&gt;describe(&amp;quot;App&amp;quot;, function() {&#xD;
-&#xD;
-  beforeEach(module(&amp;#39;hello&amp;#39;));&#xD;
-&#xD;
-  var $httpBackend, $controller;&#xD;
-  beforeEach(inject(function($injector) {&#xD;
-    $httpBackend = $injector.get(&amp;#39;$httpBackend&amp;#39;);&#xD;
-    $controller = $injector.get(&amp;#39;$controller&amp;#39;);&#xD;
-  }));&#xD;
-&#xD;
-  afterEach(function() {&#xD;
-    $httpBackend.verifyNoOutstandingExpectation();&#xD;
-    $httpBackend.verifyNoOutstandingRequest();&#xD;
-  });&#xD;
-&#xD;
-  it(&amp;quot;says Hello Test when controller loads&amp;quot;, function() {&#xD;
-    var $scope = {};&#xD;
-    $httpBackend.expectGET(&amp;#39;resource/&amp;#39;).respond(200, {&#xD;
-      id : 4321,&#xD;
-      content : &amp;#39;Hello Test&amp;#39;&#xD;
-    });&#xD;
-    var controller = $controller(&amp;#39;home&amp;#39;, {&#xD;
-      $scope : $scope&#xD;
-    });&#xD;
-    $httpBackend.flush();&#xD;
-    expect($scope.greeting.content).toEqual(&amp;#39;Hello Test&amp;#39;);&#xD;
-  });&#xD;
-&#xD;
-})
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The new pieces here are:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;p&gt;The creation of the &lt;code&gt;$httpBackend&lt;/code&gt; in a &lt;code&gt;beforeEach()&lt;/code&gt;.&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;Adding a new &lt;code&gt;afterEach()&lt;/code&gt; that verifies the state of the backend.&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;In the test function we set expectations for the backend before we create the controller, telling it to expect a call to &amp;lsquo;resource/&amp;rsquo;,and what the response should be.&lt;/p&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;p&gt;We also add a call to jasmine &lt;code&gt;expect()&lt;/code&gt; to assert the outcome.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;Without having to start and stop the test application, this test should now be green in the browser.&lt;/p&gt;&lt;h2&gt;&lt;a href="#running-specs-on-the-command-line" class="anchor" name="running-specs-on-the-command-line"&gt;&lt;/a&gt;Running Specs on the Command Line&lt;/h2&gt;&lt;p&gt;It&amp;rsquo;s great to be able to run specs in a browser, because there are excellent developer tools built into modern browsers (e.g. F12 in Chrome). You can set breakpoints and inspect variables, and well as being able to refresh the view to re-run your tests in a live server. But this won&amp;rsquo;t help you with continuous integration: for that you need a way to run the tests from a command line. There is tooling available for whatever build tools you prefer to use, but since we are using Maven here, we will add a plugin to the &amp;ldquo;pom.xml&amp;rdquo;:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint xml"&gt;&amp;lt;plugin&amp;gt;&#xD;
-  &amp;lt;groupId&amp;gt;com.github.searls&amp;lt;/groupId&amp;gt;&#xD;
-  &amp;lt;artifactId&amp;gt;jasmine-maven-plugin&amp;lt;/artifactId&amp;gt;&#xD;
-  &amp;lt;version&amp;gt;2.0-alpha-01&amp;lt;/version&amp;gt;&#xD;
-  &amp;lt;executions&amp;gt;&#xD;
-    &amp;lt;execution&amp;gt;&#xD;
-      &amp;lt;goals&amp;gt;&#xD;
-        &amp;lt;goal&amp;gt;test&amp;lt;/goal&amp;gt;&#xD;
-      &amp;lt;/goals&amp;gt;&#xD;
-    &amp;lt;/execution&amp;gt;&#xD;
-  &amp;lt;/executions&amp;gt;&#xD;
-&amp;lt;/plugin&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The default settings for this plugin won&amp;rsquo;t work with the static resource layout that we already made, so we need a bit of configuration for that:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;&amp;lt;plugin&amp;gt;&#xD;
-  ...&#xD;
-  &amp;lt;configuration&amp;gt;&#xD;
-    &amp;lt;additionalContexts&amp;gt;&#xD;
-      &amp;lt;context&amp;gt;&#xD;
-        &amp;lt;contextRoot&amp;gt;/lib&amp;lt;/contextRoot&amp;gt;&#xD;
-        &amp;lt;directory&amp;gt;${project.build.directory}/generated-resources/static/js&amp;lt;/directory&amp;gt;&#xD;
-      &amp;lt;/context&amp;gt;&#xD;
-    &amp;lt;/additionalContexts&amp;gt;&#xD;
-    &amp;lt;preloadSources&amp;gt;&#xD;
-      &amp;lt;source&amp;gt;/lib/angular-bootstrap.js&amp;lt;/source&amp;gt;&#xD;
-      &amp;lt;source&amp;gt;/webjars/angularjs/1.3.8/angular-mocks.js&amp;lt;/source&amp;gt;&#xD;
-    &amp;lt;/preloadSources&amp;gt;&#xD;
-    &amp;lt;jsSrcDir&amp;gt;${project.basedir}/src/main/resources/static/js&amp;lt;/jsSrcDir&amp;gt;&#xD;
-    &amp;lt;jsTestSrcDir&amp;gt;${project.basedir}/src/test/resources/static/js&amp;lt;/jsTestSrcDir&amp;gt;&#xD;
-    &amp;lt;webDriverClassName&amp;gt;org.openqa.selenium.phantomjs.PhantomJSDriver&amp;lt;/webDriverClassName&amp;gt;&#xD;
-  &amp;lt;/configuration&amp;gt;&#xD;
-&amp;lt;/plugin&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Notice that the &lt;code&gt;webDriverClassName&lt;/code&gt; is specified as &lt;code&gt;PhantomJSDriver&lt;/code&gt;, which means you need &lt;code&gt;phantomjs&lt;/code&gt; to be on your &lt;code&gt;PATH&lt;/code&gt; at runtime. This works out of the box in &lt;a href="https://travis-ci.org"&gt;Travis CI&lt;/a&gt;, and requires a simple installation in Linux, MacOS and Windows - you can &lt;a href="http://phantomjs.org/download.html"&gt;download binaries&lt;/a&gt; or use a package manager, like &lt;code&gt;apt-get&lt;/code&gt; on Ubuntu for instance. In principle, any Selenium web driver can be used here (and the default is &lt;code&gt;HtmlUnitDriver&lt;/code&gt;), but PhantomJS is probably the best one to use for an Angular application.&lt;/p&gt;&lt;p&gt;We also need to make the Angular library available to the plugin so it can load that &amp;ldquo;angular-mocks.js&amp;rdquo; dependency:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;&amp;lt;plugin&amp;gt;&#xD;
-  ...&#xD;
-  &amp;lt;dependencies&amp;gt;&#xD;
-    &amp;lt;dependency&amp;gt;&#xD;
-      &amp;lt;groupId&amp;gt;org.webjars&amp;lt;/groupId&amp;gt;&#xD;
-      &amp;lt;artifactId&amp;gt;angularjs&amp;lt;/artifactId&amp;gt;&#xD;
-      &amp;lt;version&amp;gt;1.3.8&amp;lt;/version&amp;gt;&#xD;
-    &amp;lt;/dependency&amp;gt;&#xD;
-  &amp;lt;/dependencies&amp;gt;&#xD;
-&amp;lt;/plugin&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;That&amp;rsquo;s it. All boilerplate again (so it can go in a parent pom if you want to share the code between multiple projects). Just run it on the command line:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;$ mvn jasmine:test
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The tests also run as part of the Maven &amp;ldquo;test&amp;rdquo; lifecycle, so you can just run &lt;code&gt;mvn test&lt;/code&gt; to run all the Java tests as well as the Javascript ones, slotting very smoothly into your existing build and deployment cycle. Here&amp;rsquo;s the log:&lt;/p&gt;
-&lt;pre&gt;&lt;code class="prettyprint"&gt;$ mvn test&#xD;
-...&#xD;
-[INFO] &#xD;
--------------------------------------------------------&#xD;
- J A S M I N E   S P E C S&#xD;
--------------------------------------------------------&#xD;
-[INFO] &#xD;
-App&#xD;
-  says Hello Test when controller loads&#xD;
-&#xD;
-Results: 1 specs, 0 failures&#xD;
-&#xD;
-[INFO] ------------------------------------------------------------------------&#xD;
-[INFO] BUILD SUCCESS&#xD;
-[INFO] ------------------------------------------------------------------------&#xD;
-[INFO] Total time: 21.064s&#xD;
-[INFO] Finished at: Sun Apr 26 14:46:14 BST 2015&#xD;
-[INFO] Final Memory: 47M/385M&#xD;
-[INFO] ------------------------------------------------------------------------
-&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;The Jasmine Maven plugin also comes with a goal &lt;code&gt;mvn jasmine:bdd&lt;/code&gt; that runs a server that you can load in your browser to run the tests (as an alternative to the &lt;code&gt;TestApplication&lt;/code&gt; above).&lt;/p&gt;&lt;h2&gt;&lt;a href="#conclusion" class="anchor" name="conclusion"&gt;&lt;/a&gt;Conclusion&lt;/h2&gt;&lt;p&gt;Being able to run unit tests for Javascript is important in a modern web application and it&amp;rsquo;s a topic that we&amp;rsquo;ve ignored (or dodged) up to now in this series. With this installment we have presented the basic ingredients of how to write the tests, how to run them at development time and also, importantly, in a continuous integration setting. The approach we have taken is not going to suit everyone, so please don&amp;rsquo;t feel bad about doing it in a different way, but make sure you have all those ingredients. The way we did it here will probably feel comfortable to traditional Java enterprise developers, and integrates well with their existing tools and processes, so if you are in that category I hope you will find it useful as a starting point. More examples of testing with Angular and Jasmine can be found in plenty of places on the internet, but the first point of call might be the &lt;a href="https://github.com/dsyer/spring-security-angular/tree/master/single"&gt;&amp;ldquo;single&amp;rdquo; sample&lt;/a&gt; from this series, which now has some up to date test code which is a bit less trivial than the code we needed to write for the &amp;ldquo;basic&amp;rdquo; sample in this article.&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Social 1.1.1 Released</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/05/15/spring-social-1-1-1-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Craig Walls</name>
-    </author>
-    <id>tag:spring.io,2015-05-15:2124</id>
-    <updated>2015-05-15T15:03:03Z</updated>
-    <content type="html">&lt;p&gt;Dear Spring Community,&lt;/p&gt;&lt;p&gt;I&amp;rsquo;m pleased to announce the availability of Spring Social 1.1.1.RELEASE. This is a maintenance release, addressing a handful of bugs and introducing a few minor improvements. View the &lt;a href="https://jira.spring.io/jira/secure/ReleaseNote.jspa?projectId=10481&amp;version=14658"&gt;release notes&lt;/a&gt; for full details.&lt;/p&gt;&lt;p&gt;Compatibility note: In order to fix a &lt;a href="https://jira.spring.io/browse/SOCIAL-467"&gt;serialization issue&lt;/a&gt; when using ProviderSignInUtils, a minor breaking change was necessary. ProviderSignInAttempt no longer carries its own ConnectionFactoryLocator and UsersConnectionRepository. Those must now be passed in as parameters when instantiating ProviderSignInUtils.&lt;/p&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-social/core.html"&gt;Project Site&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-social/docs/1.1.1.RELEASE/reference/htmlsingle/"&gt;Reference&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-social/docs/1.1.1.RELEASE/apidocs/"&gt;JavaDoc&lt;/a&gt;&lt;/p&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Test HtmlUnit 1.0.0 RC1 Released</title>
-    <link rel="alternate" href="https://spring.io/blog/2015/05/14/spring-test-htmlunit-1-0-0-rc1-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Rob Winch</name>
-    </author>
-    <id>tag:spring.io,2015-05-12:2118</id>
-    <updated>2015-05-14T14:23:38Z</updated>
-    <content type="html">&lt;p&gt;I&amp;rsquo;m pleased to announce the release of &lt;a href="http://projects.spring.io/spring-test-htmlunit/"&gt;Spring Test HtmlUnit&lt;/a&gt; 1.0.0 RC1. The highlights of the release can be found below:&lt;/p&gt;&lt;h2&gt;&lt;a href="#migration-guide" class="anchor" name="migration-guide"&gt;&lt;/a&gt;Migration Guide&lt;/h2&gt;&lt;p&gt;A detailed &lt;a href="http://docs.spring.io/spring-test-htmlunit/docs/1.0.0.RC1/reference/html5/#migrating-from-1-0-0-m2-to-1-0-0-rc1"&gt;migration guide from 1.0.0.M2 to 1.0.0.RC1&lt;/a&gt; was added.&lt;/p&gt;&lt;h2&gt;&lt;a href="#new-maven-coordinates" class="anchor" name="new-maven-coordinates"&gt;&lt;/a&gt;New Maven Coordinates&lt;/h2&gt;&lt;p&gt;We have changed the maven group id. For details refer to &lt;a href="http://docs.spring.io/spring-test-htmlunit/docs/1.0.0.RC1/reference/html5/#updating-dependencies"&gt;Updating Dependencies&lt;/a&gt;&lt;/p&gt;&lt;h2&gt;&lt;a href="#default-context-path-is-quot-quot" class="anchor" name="default-context-path-is-quot-quot"&gt;&lt;/a&gt;Default Context Path is &amp;quot;&amp;quot;&lt;/h2&gt;&lt;p&gt;Based upon community feedback, the default context path is now &amp;quot;&amp;quot;. This means if you are using a previous release, you will need to update the URL that is configured.&lt;/p&gt;&lt;p&gt;For details refer to &lt;a href="http://docs.spring.io/spring-test-htmlunit/docs/1.0.0.RC1/reference/html5/#default-context-path-is-now"&gt;Default Context Path is now &amp;quot;&amp;quot;&lt;/a&gt;&lt;/p&gt;&lt;h2&gt;&lt;a href="#mockmvc-webclient-amp-webdriver-builders" class="anchor" name="mockmvc-webclient-amp-webdriver-builders"&gt;&lt;/a&gt;MockMvc WebClient &amp;amp; WebDriver Builders&lt;/h2&gt;&lt;p&gt;This release adds builders for MockMvc and HtmlUnit integration. The builders provide a number of benefits:&lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;Simplify the setup&lt;/li&gt;
-  &lt;li&gt;Allow for more configuration options&lt;/li&gt;
-  &lt;li&gt;By default any URL that has a host of localhost is processed by MockMvc (i.e. &lt;a href="http://localhost/something"&gt;http://localhost/something&lt;/a&gt;) while any other host is retrieved normally (i.e. &lt;a href="http://cdn.example.com/jquery.js)"&gt;http://cdn.example.com/jquery.js)&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;&lt;p&gt;For details refer to &lt;a href="http://docs.spring.io/spring-test-htmlunit/docs/1.0.0.RC1/reference/html5/#mockmvc-webclient-webdriver-builders"&gt;MockMvc WebClient &amp;amp; WebDriver Builders&lt;/a&gt;&lt;/p&gt;&lt;h2&gt;&lt;a href="#new-project-site-amp-documentation" class="anchor" name="new-project-site-amp-documentation"&gt;&lt;/a&gt;New Project Site &amp;amp; Documentation&lt;/h2&gt;&lt;p&gt;We have added a new &lt;a href="http://projects.spring.io/spring-test-htmlunit/"&gt;Project Site&lt;/a&gt;. We have also released &lt;a href="http://docs.spring.io/spring-test-htmlunit/docs/1.0.0.RC1/reference/html5/"&gt;documentation&lt;/a&gt; in which all code is tested.&lt;/p&gt;&lt;h2&gt;&lt;a href="#forwarded-urls-now-processed" class="anchor" name="forwarded-urls-now-processed"&gt;&lt;/a&gt;Forwarded URLs now processed&lt;/h2&gt;&lt;p&gt;Forwarded URLs are now processed properly.&lt;/p&gt;&lt;h1&gt;&lt;a href="#feedback-please" class="anchor" name="feedback-please"&gt;&lt;/a&gt;Feedback Please&lt;/h1&gt;&lt;p&gt;If you have feedback, I encourage you to reach out via &lt;a href="https://github.com/spring-projects/spring-test-htmlunit/issues"&gt;github issues&lt;/a&gt;, via the comments section, or ping me on twitter &lt;a href="http://twitter.com/rob_winch"&gt;@rob_winch&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;If all goes well, we plan to go GA in July.&lt;/p&gt;&lt;p&gt;&lt;a href="http://projects.spring.io/spring-test-htmlunit/"&gt;Project Site&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-test-htmlunit/docs/1.0.0.RC1/reference/html5/"&gt;Reference&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-test-htmlunit/issues"&gt;Issues&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-test-htmlunit/issues?utf8=%E2%9C%93&amp;q=+is%3Aissue+milestone%3A1.0.0.RC1+"&gt;Changelog&lt;/a&gt;&lt;/p&gt;</content>
   </entry>
 </feed>

@@ -1,7 +1,0 @@
-package com.dudeclothing.admin.dataRepo;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-public interface StockRepo extends JpaRepository<T, ID> {
-
-}

@@ -2,80 +2,71 @@ Ext.require([ 'Ext.grid.*', 'Ext.data.*', 'Ext.panel.*',
 		'Ext.layout.container.Border' ]);
 
 Ext.onReady(function() {
-	Ext.define('Account', {
-		extend : 'Ext.data.Model',
-		fields : [ {
-			name : 'accountId',
-			type : 'int'
-		}, {
-			name : 'name',
-			type : 'string'
-		}
 
-		]
-	});
-
-	// create the Data Store
-	var store = Ext.create('Ext.data.Store', {
-		autoLoad : true,
-		autoSync : true,
-		model : 'Account',
-		proxy : {
-			type : 'rest',
-			url : 'account/accounts',
-			reader : {
-				type : 'json',
-				rootProperty : 'data'
-			},
-			writer : {
-				type : 'json'
-			}
-		},
-		listeners : {
-			write : function(store, operation) {
-				var record = operation.getRecords()[0], name = Ext.String
-						.capitalize(operation.action), verb;
-
-				if (name == 'Destroy') {
-					verb = 'Destroyed';
-				} else {
-					verb = name + 'd';
-				}
-				Ext.example.msg(name, Ext.String.format("{0} user: {1}", verb,
-						record.getId()));
-
-			}
-		}
-	});
-
-	// create the grid
-	var grid = Ext.create('Ext.grid.Panel', {
-		bufferedRenderer : false,
-		store : store,
-		columns : [ {
-			text : "Account",
-			width : 150,
-			dataIndex : 'accountId',
-			sortable : true
-		}, {
-			text : "Account Name",
-			flex : 1,
-			dataIndex : 'name',
-		} ],
-		forceFit : false,
-		split : true,
-		region : 'north'
-	});
-
-	Ext.create('Ext.Panel', {
-		renderTo : 'grid',
+	var accountPanel = Ext.create('Ext.Panel', {
 		frame : true,
-		title : 'Account List',
-		width : 300,
-		height : 300,
+		width : 1000,
+		height : 600,
 		layout : 'border',
-		items : [ grid ]
+		items : [ accountGrid, accountForm ]
 	});
 
-	store.load();
+	var currecnyPanel = Ext.create('Ext.Panel', {
+		frame : true,
+		width : 1000,
+		height : 600,
+		layout : 'border',
+		items : [ currencyGrid, currencyForm ]
+	});
+
+	var statusPanel = Ext.create('Ext.Panel', {
+		frame : true,
+		width : 1000,
+		height : 600,
+		layout : 'border',
+		items : [ statusGrid, statusForm ]
+	});
+
+	var brandPanel = Ext.create('Ext.Panel', {
+		frame : true,
+		width : 1000,
+		height : 600,
+		layout : 'border',
+		items : [ brandGrid, brandForm ]
+	});
+	// end
+
+	accountStore.load();
+	brandStore.load();
+	statusStore.load();
+	currencyStore.load();
+	
+
+	var mainContainer = Ext.create('Ext.tab.Panel', {
+		width : 1030,
+		height : 630,
+		bodyPadding : 15,
+		renderTo : 'grid',
+		items : [ {
+			title : 'Account',
+			items : accountPanel
+		}, {
+			title : 'Currency',
+			items : currecnyPanel
+		}, {
+			title : 'Brand',
+			items : brandPanel
+		}, {
+			title : 'Status',
+			items : statusPanel
+		}, {
+			title : "Client"
+		}, {
+			title : "Order",
+		}, {
+			title : "Purchase"
+		}, {
+			title : "Stock"
+		} ]
+	});
 });
