@@ -69,4 +69,72 @@
 			}
 		}
 	});
+	
+	var stockStore = Ext.create('Ext.data.Store', {
+		autoLoad : true,
+		autoSync : true,
+		model : 'Stock',
+		proxy : {
+			type : 'rest',
+			url : '/admin/stock/stocks',
+			reader : {
+				type : 'json',
+				rootProperty : 'data'
+			},
+			writer : {
+				type : 'json'
+			}
+		}
+	});
+	
+	var purchaseStore = Ext.create('Ext.data.Store', {
+		autoLoad : true,
+		autoSync : true,
+		model : 'Purchase',
+		proxy : {
+			type : 'rest',
+			url : '/admin/purchase/purcahses',
+			reader : {
+				type : 'json',
+				rootProperty : 'data'
+			},
+			writer : {
+				type : 'json'
+			}
+		}
+	});
+	
+	var orderStore = Ext.create('Ext.data.Store', {
+		autoLoad : true,
+		autoSync : true,
+		model : 'Order',
+		proxy : {
+			type : 'rest',
+			url : '/admin/order/orders',
+			reader : {
+				type : 'json',
+				rootProperty : 'data'
+			},
+			writer : {
+				type : 'json'
+			}
+		}
+	});
+	
+	var clientStore = Ext.create('Ext.data.Store', {
+		autoLoad : true,
+		autoSync : true,
+		model : 'Client',
+		proxy : {
+			type : 'rest',
+			url : '/admin/client/clients',
+			reader : {
+				type : 'json',
+				rootProperty : 'data'
+			},
+			writer : {
+				type : 'json'
+			}
+		}
+	});
 	// end store

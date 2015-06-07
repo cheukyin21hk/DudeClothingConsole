@@ -3,38 +3,7 @@ Ext.require([ 'Ext.grid.*', 'Ext.data.*', 'Ext.panel.*',
 
 Ext.onReady(function() {
 
-	var accountPanel = Ext.create('Ext.Panel', {
-		frame : true,
-		width : 1000,
-		height : 600,
-		layout : 'border',
-		items : [ accountGrid, accountForm ]
-	});
 
-	var currecnyPanel = Ext.create('Ext.Panel', {
-		frame : true,
-		width : 1000,
-		height : 600,
-		layout : 'border',
-		items : [ currencyGrid, currencyForm ]
-	});
-
-	var statusPanel = Ext.create('Ext.Panel', {
-		frame : true,
-		width : 1000,
-		height : 600,
-		layout : 'border',
-		items : [ statusGrid, statusForm ]
-	});
-
-	var brandPanel = Ext.create('Ext.Panel', {
-		frame : true,
-		width : 1000,
-		height : 600,
-		layout : 'border',
-		items : [ brandGrid, brandForm ]
-	});
-	// end
 
 	accountStore.load();
 	brandStore.load();
