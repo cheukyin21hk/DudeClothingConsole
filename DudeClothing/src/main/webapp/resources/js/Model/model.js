@@ -16,6 +16,19 @@ Ext.define('Account', {
 	]
 });
 
+Ext.define('Brand', {
+	extend : 'Ext.data.Model',
+	fields : [ {
+		name : 'brandId',
+		type : 'int'
+	}, {
+		name : 'name',
+		type : 'string'
+	}
+
+	]
+});
+
 Ext.define('Client', {
 	extend : 'Ext.data.Model',
 	fields : [ {
@@ -30,6 +43,58 @@ Ext.define('Client', {
 	}
 
 	]
+});
+
+Ext.define('Currency', {
+	extend : 'Ext.data.Model',
+	fields : [ {
+		name : 'currencyId',
+		type : 'int'
+	}, {
+		name : 'name',
+		type : 'string'
+	}, {
+		name : 'rate',
+		type : 'float'
+	}
+
+	]
+});
+
+Ext.define('Status', {
+	extend : 'Ext.data.Model',
+	fields : [ {
+		name : 'statusId',
+		type : 'int'
+	}, {
+		name : 'name',
+		type : 'string'
+	}
+
+	]
+});
+
+Ext.define('Stock', {
+	extend : 'Ext.data.Model',
+	fields : [ {
+		name : 'stockId',
+		type : 'int'
+	}, {
+		name : 'brandId',
+		type : 'int'
+	}, {
+		name : 'size',
+		type : 'string'
+	}, {
+		name : 'name',
+		type : 'string'
+	}, {
+		name : 'sold',
+		type : 'int'
+	}, {
+		name : 'purchaseId',
+		type : 'int'
+	} ]
 });
 
 Ext.define('Order', {
@@ -47,39 +112,25 @@ Ext.define('Order', {
 		name : 'depositeDate',
 		type : 'int'
 	}, {
-		name : 'accountId',
-		type : 'int'
-	}, {
 		name : 'stockId',
 		type : 'int'
 	}, {
 		name : 'deposit',
 		type : 'int'
-	},
-	{
-		name : 'statusId',
-		type : 'int'
-	},
-	{
+	}, {
 		name : 'clientId',
-		type : 'int'
-	},
-	{
-		name : 'purchaseId',
 		type : 'int'
 	}
 
 	]
 });
 
-Ext.define('purchase', {
+Ext.define('Purchase', {
 	extend : 'Ext.data.Model',
-	fields : [ 
-	{
+	fields : [ {
 		name : 'purchaseId',
 		type : 'int'
-	},
-	{
+	}, {
 		name : 'date',
 		type : 'int'
 	}, {
@@ -100,83 +151,13 @@ Ext.define('purchase', {
 	}, {
 		name : 'logisticCode',
 		type : 'int'
-	},
-	{
+	}, {
 		name : 'trackingNo',
 		type : 'int'
-	},
-	{
+	}, {
 		name : 'invoice',
 		type : 'int'
-	}
-	]
+	} ]
 });
 
-Ext.define('Currency', {
-	extend : 'Ext.data.Model',
-	fields : [ {
-		name : 'currencyId',
-		type : 'int'
-	}, {
-		name : 'name',
-		type : 'string'
-	}, {
-		name : 'rate',
-		type : 'float'
-	}
-
-	]
-});
-
-Ext.define('Brand', {
-	extend : 'Ext.data.Model',
-	fields : [ {
-		name : 'brandId',
-		type : 'int'
-	}, {
-		name : 'name',
-		type : 'string'
-	}
-
-	]
-});
-
-Ext.define('Stock',{
-	extend:'Ext.data.Model',
-	fields:[{
-name : 'stockId',
-		type : 'int'
-	},{
-		name:'brandId',
-		type:'int'
-	},{
-		name:'size',
-		type:'string'
-	},
-	{
-		name:'name',
-		type:'string'
-	},
-	{
-		name:'sold',
-		type:'int'
-	},
-	{
-		name:'purchaseId',
-		type:'int'
-	}]
-});
-
-Ext.define('Status', {
-	extend : 'Ext.data.Model',
-	fields : [ {
-		name : 'statusId',
-		type : 'int'
-	}, {
-		name : 'name',
-		type : 'string'
-	}
-
-	]
-});
 // end model

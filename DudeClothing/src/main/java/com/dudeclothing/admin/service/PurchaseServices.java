@@ -25,7 +25,8 @@ public class PurchaseServices {
 	}
 
 	@Transactional
-	public void add(Purchase purchase) {
-		purchaseRepo.saveAndFlush(purchase);
+	public Purchase add(Purchase purchase) {
+		Purchase result = purchaseRepo.saveAndFlush(purchase);
+		return result;
 	}
 }

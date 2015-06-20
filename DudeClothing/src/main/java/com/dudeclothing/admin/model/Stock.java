@@ -1,45 +1,62 @@
 package com.dudeclothing.admin.model;
 
-import java.io.Serializable;
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * The persistent class for the stock database table.
  * 
  */
 @Entity
-@NamedQuery(name = "Stock.findAll", query = "SELECT s FROM Stock s")
-public class Stock implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Stock {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int stockId;
 
 	private String name;
 
 	private String size;
-	
+
+	private Character sold;
+
+	public Stock() {
+	}
+
+	@ManyToOne
+	@JoinColumn(name = "purchaseId")
+	private Purchase purchase;
+
+	@ManyToOne
+	@JoinColumn(name = "brandId")
+	private Brand brand;
+
+	public Purchase getPurchaseId() {
+		return purchase;
+	}
+
+	public void setPurchaseId(Purchase purchase) {
+		this.purchase = purchase;
+	}
+
+	public Brand getBrand() {
+		return brand;
+	}
+
+	public void setBrandId(Brand brand) {
+		this.brand = brand;
+	}
+
 	public Character getSold() {
 		return sold;
 	}
 
 	public void setSold(Character sold) {
 		this.sold = sold;
-	}
-
-	private Character sold;
-
-	// bi-directional many-to-one association to Brand
-	@ManyToOne
-	@JoinColumn(name = "brandId")
-	private Brand brand;
-
-	// bi-directional many-to-one association to Purchase
-	@ManyToOne
-	@JoinColumn(name = "purchaseId")
-	private Purchase purchase;
-
-	public Stock() {
 	}
 
 	public int getStockId() {
@@ -64,23 +81,6 @@ public class Stock implements Serializable {
 
 	public void setSize(String size) {
 		this.size = size;
-	}
-
-
-	public Brand getBrand() {
-		return this.brand;
-	}
-
-	public void setBrand(Brand brand) {
-		this.brand = brand;
-	}
-
-	public Purchase getPurchase() {
-		return this.purchase;
-	}
-
-	public void setPurchase(Purchase purchase) {
-		this.purchase = purchase;
 	}
 
 }

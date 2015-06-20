@@ -1,0 +1,18 @@
+/**
+ * 
+ */
+var accountDropdown = Ext.create('Ext.form.ComboBox', {
+	fieldLabel : 'Choose a Account',
+	store : accountStore,
+	queryMode : 'remote',
+	displayField : 'name',
+	valueField : 'accountId',
+});
+
+var statusDropdown = Ext.create('Ext.form.ComboBox', {
+	fieldLabel : 'Choose a Account',
+	store : statusStore,
+	queryMode : 'remote',
+	displayField : 'name',
+	valueField : 'statusId',
+});

@@ -28,4 +28,9 @@ public class BrandServices {
 	public void add(Brand brand) {
 		brandRepo.saveAndFlush(brand);
 	}
+	
+	@Transactional
+	public Brand getBrandById(Long brandId){
+		return brandRepo.findOne(brandId);
+	}
 }

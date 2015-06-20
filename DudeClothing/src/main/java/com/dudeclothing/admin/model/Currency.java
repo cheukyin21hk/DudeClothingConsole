@@ -16,7 +16,7 @@ public class Currency {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int currencyId;
+	private long currencyId;
 
 	private String name;
 
@@ -25,11 +25,11 @@ public class Currency {
 	public Currency() {
 	}
 
-	public int getCurrencyId() {
+	public long getCurrencyId() {
 		return this.currencyId;
 	}
 
-	public void setCurrencyId(int currencyId) {
+	public void setCurrencyId(long currencyId) {
 		this.currencyId = currencyId;
 	}
 

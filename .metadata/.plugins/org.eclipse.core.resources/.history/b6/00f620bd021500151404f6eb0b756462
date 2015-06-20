@@ -1,0 +1,60 @@
+package com.dudeclothing.admin.model;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+/**
+ * The persistent class for the stock database table.
+ * 
+ */
+@Entity
+public class Stock {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int stockId;
+
+	private String name;
+
+	private String size;
+
+	public Character getSold() {
+		return sold;
+	}
+
+	public void setSold(Character sold) {
+		this.sold = sold;
+	}
+
+	private Character sold;
+
+	public Stock() {
+	}
+
+	public int getStockId() {
+		return this.stockId;
+	}
+
+	public void setStockId(int stockId) {
+		this.stockId = stockId;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getSize() {
+		return this.size;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
+}

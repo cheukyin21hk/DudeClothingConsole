@@ -1,0 +1,11 @@
+/**
+ * 
+ */
+Ext.create('Ext.form.ComboBox', {
+	fieldLabel : 'Choose State',
+	store : AccountStore,
+	queryMode : 'local',
+	displayField : 'name',
+	valueField : 'abbr',
+	renderTo : Ext.getBody()
+});

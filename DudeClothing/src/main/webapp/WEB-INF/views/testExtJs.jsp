@@ -18,12 +18,15 @@
 	src="<c:url value="/resources/js/Model/store.js"/>"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/Grid/grid.js"/>"></script>
+	<script type="text/javascript"
+	src="<c:url value="/resources/js/UIComponent/dropdownList.js"/>"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/Form/form.js"/>"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/Panel/panel.js"/>"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/test.js"/>"></script>
+
 </head>
 <body>
 	<div id="grid"></div>

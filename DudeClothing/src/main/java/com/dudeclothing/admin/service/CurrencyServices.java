@@ -20,12 +20,16 @@ public class CurrencyServices {
 
 	@Transactional
 	public List<Currency> getAll() {
-		List<Currency> result = currencyRepo.findAll();
-		return result;
+		return currencyRepo.findAll();
 	}
 
 	@Transactional
 	public void add(Currency currency) {
 		currencyRepo.saveAndFlush(currency);
+	}
+
+	@Transactional
+	public Currency findCurrencyById(long currencyId) {
+		return currencyRepo.findOne(currencyId);
 	}
 }

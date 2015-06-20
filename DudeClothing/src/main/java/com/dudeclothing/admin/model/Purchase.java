@@ -1,57 +1,43 @@
 package com.dudeclothing.admin.model;
 
-import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * The persistent class for the purchase database table.
  * 
  */
 @Entity
-@NamedQuery(name="Purchase.findAll", query="SELECT p FROM Purchase p")
-public class Purchase implements Serializable {
-	private static final long serialVersionUID = 1L;
+public class Purchase {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int purchaseId;
+	@ManyToOne
+	@JoinColumn(name = "currencyId")
+	private Currency currency;
+	public Currency getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
+	}
 
 	private float currencyPrice;
-
-	@Temporal(TemporalType.DATE)
 	private Date date;
-
 	private float foreignShipCost;
-
 	private String invoice;
-
 	private float localShipCost;
-
 	private int logisticCode;
-
 	private int quantity;
-
 	private int trackingNo;
-
-	//bi-directional many-to-one association to Order
-	@OneToMany(mappedBy="purchase")
-	private List<Order> orders;
-
-	//bi-directional many-to-one association to Currency
-	@ManyToOne
-	@JoinColumn(name="currencyId")
-	private Currency currency;
-
-	//bi-directional one-to-one association to Item
-	@OneToOne
-	@JoinColumn(name="purchaseId")
-	private Item item;
-
-	//bi-directional many-to-one association to Stock
-	@OneToMany(mappedBy="purchase")
-	private List<Stock> stocks;
 
 	public Purchase() {
 	}
@@ -126,66 +112,6 @@ public class Purchase implements Serializable {
 
 	public void setTrackingNo(int trackingNo) {
 		this.trackingNo = trackingNo;
-	}
-
-	public List<Order> getOrders() {
-		return this.orders;
-	}
-
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
-
-	public Order addOrder(Order order) {
-		getOrders().add(order);
-		order.setPurchase(this);
-
-		return order;
-	}
-
-	public Order removeOrder(Order order) {
-		getOrders().remove(order);
-		order.setPurchase(null);
-
-		return order;
-	}
-
-	public Currency getCurrency() {
-		return this.currency;
-	}
-
-	public void setCurrency(Currency currency) {
-		this.currency = currency;
-	}
-
-	public Item getItem() {
-		return this.item;
-	}
-
-	public void setItem(Item item) {
-		this.item = item;
-	}
-
-	public List<Stock> getStocks() {
-		return this.stocks;
-	}
-
-	public void setStocks(List<Stock> stocks) {
-		this.stocks = stocks;
-	}
-
-	public Stock addStock(Stock stock) {
-		getStocks().add(stock);
-		stock.setPurchase(this);
-
-		return stock;
-	}
-
-	public Stock removeStock(Stock stock) {
-		getStocks().remove(stock);
-		stock.setPurchase(null);
-
-		return stock;
 	}
 
 }

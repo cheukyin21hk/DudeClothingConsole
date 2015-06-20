@@ -14,7 +14,7 @@ import com.dudeclothing.admin.model.Currency;
 import com.dudeclothing.admin.service.CurrencyServices;
 
 @Controller
-@RequestMapping(value = "currency")
+@RequestMapping("currency")
 public class CurrencyController {
 	@Autowired
 	private CurrencyServices currencyServices;

@@ -3,13 +3,14 @@ Ext.require([ 'Ext.grid.*', 'Ext.data.*', 'Ext.panel.*',
 
 Ext.onReady(function() {
 
-
-
 	accountStore.load();
 	brandStore.load();
 	statusStore.load();
 	currencyStore.load();
-	
+	clientStore.load();
+	stockStore.load();
+	purchaseStore.load();
+	orderStore.load();
 
 	var mainContainer = Ext.create('Ext.tab.Panel', {
 		width : 1030,
@@ -17,6 +18,18 @@ Ext.onReady(function() {
 		bodyPadding : 15,
 		renderTo : 'grid',
 		items : [ {
+			title : "Stock",
+			items : stockPanel
+		}, {
+			title : "Order",
+			items : orderPanel
+		}, {
+			title : "Purchase",
+			items : purchasePanel
+		}, {
+			title : "Client",
+			items : clientPanel
+		}, {
 			title : 'Account',
 			items : accountPanel
 		}, {
@@ -28,14 +41,6 @@ Ext.onReady(function() {
 		}, {
 			title : 'Status',
 			items : statusPanel
-		}, {
-			title : "Client"
-		}, {
-			title : "Order",
-		}, {
-			title : "Purchase"
-		}, {
-			title : "Stock"
 		} ]
 	});
 });

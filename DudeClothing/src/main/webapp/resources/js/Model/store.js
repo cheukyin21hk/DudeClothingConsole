@@ -93,7 +93,7 @@
 		model : 'Purchase',
 		proxy : {
 			type : 'rest',
-			url : '/admin/purchase/purcahses',
+			url : '/admin/purchase/purchases',
 			reader : {
 				type : 'json',
 				rootProperty : 'data'

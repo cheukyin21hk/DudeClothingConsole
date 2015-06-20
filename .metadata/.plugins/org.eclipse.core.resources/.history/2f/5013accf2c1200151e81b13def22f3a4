@@ -1,0 +1,78 @@
+/**
+ * 
+ */
+var accountPanel = Ext.create('Ext.tab.Panel', {
+	frame : true,
+	width : 1000,
+	height : 600,
+	layout : 'border',
+	items : [ accountGrid, accountForm ]
+});
+
+var currecnyPanel = Ext.create('Ext.tab.Panel', {
+	frame : true,
+	width : 1000,
+	height : 600,
+	layout : 'border',
+	items : [ currencyGrid, currencyForm ]
+});
+
+var statusPanel = Ext.create('Ext.tab.Panel', {
+	frame : true,
+	width : 1000,
+	height : 600,
+	layout : 'border',
+	items : [ statusGrid, statusForm ]
+});
+
+var brandPanel = Ext.create('Ext.tab.Panel', {
+	frame : true,
+	width : 1000,
+	height : 600,
+	layout : 'border',
+	items : [ brandGrid, brandForm ]
+});
+
+var clientPanel = Ext.create('Ext.tab.Panel', {
+	frame : true,
+	width : 1000,
+	height : 600,
+	layout : 'border',
+	items : [ clientGrid, clientForm ]
+});
+
+var orderPanel = Ext.create('Ext.tab.Panel', {
+	frame : true,
+	width : 1000,
+	height : 600,
+	layout : 'border',
+	items : [ {
+		title : 'Order Record',
+		items : orderGrid
+	}, {
+		title : 'Order Info',
+		items : orderForm
+	} ]
+});
+
+var purchasePanel = Ext.create('Ext.tab.Panel', {
+	width : 1000,
+	height : 600,
+	items : [ {
+		title : 'Purchase Record',
+		items : purchaseGrid
+	}, {
+		title : 'Purchase Info',
+		items : purchaseForm
+	} ]
+});
+
+var stockPanel = Ext.create('Ext.Panel', {
+	frame : true,
+	width : 1000,
+	bodypadding : 10,
+	height : 600,
+	layout : 'border',
+	items : [ stockGrid ]
+});
+// end
