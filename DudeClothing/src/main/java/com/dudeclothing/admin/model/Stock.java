@@ -16,16 +16,10 @@ public class Stock {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int stockId;
-
+	private long stockId;
 	private String name;
-
 	private String size;
-
 	private Character sold;
-
-	public Stock() {
-	}
 
 	@ManyToOne
 	@JoinColumn(name = "purchaseId")
@@ -35,11 +29,14 @@ public class Stock {
 	@JoinColumn(name = "brandId")
 	private Brand brand;
 
-	public Purchase getPurchaseId() {
+	public Stock() {
+	}
+
+	public Purchase getPurchase() {
 		return purchase;
 	}
 
-	public void setPurchaseId(Purchase purchase) {
+	public void setPurchase(Purchase purchase) {
 		this.purchase = purchase;
 	}
 
@@ -47,7 +44,7 @@ public class Stock {
 		return brand;
 	}
 
-	public void setBrandId(Brand brand) {
+	public void setBrand(Brand brand) {
 		this.brand = brand;
 	}
 
@@ -59,11 +56,11 @@ public class Stock {
 		this.sold = sold;
 	}
 
-	public int getStockId() {
+	public long getStockId() {
 		return this.stockId;
 	}
 
-	public void setStockId(int stockId) {
+	public void setStockId(long stockId) {
 		this.stockId = stockId;
 	}
 

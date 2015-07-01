@@ -28,4 +28,9 @@ public class StockServices {
 	public void add(Stock stock) {
 		stockRepo.saveAndFlush(stock);
 	}
+
+	@Transactional
+	public Stock findStockById(long stockId) {
+		return stockRepo.findOne(stockId);
+	}
 }

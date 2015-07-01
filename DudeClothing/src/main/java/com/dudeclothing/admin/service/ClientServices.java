@@ -20,12 +20,16 @@ public class ClientServices {
 
 	@Transactional
 	public List<Client> getAll() {
-		List<Client> result = clientRepo.findAll();
-		return result;
+		return clientRepo.findAll();
 	}
 
 	@Transactional
 	public void add(Client client) {
 		clientRepo.saveAndFlush(client);
+	}
+
+	@Transactional
+	public Client findClientById(long clientId) {
+		return clientRepo.findOne(clientId);
 	}
 }

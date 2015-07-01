@@ -2,6 +2,7 @@ package com.dudeclothing.admin.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +19,12 @@ import com.dudeclothing.admin.service.AccountServices;
 public class AccountController {
 	@Autowired
 	private AccountServices accountServices;
+	private final Logger logger = Logger.getLogger(AccountController.class);
 
 	@RequestMapping(value = "/accounts", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Account> listAll(Model model) {
-		System.out.println("Account list all is called");
+		logger.debug("Account list all is called");
 		List<Account> list = accountServices.getAll();
 		return list;
 	}
@@ -30,10 +32,10 @@ public class AccountController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	@ResponseBody
 	public Account addAccount(@RequestParam(value = "name") String name) {
-		System.out.println("Account added");
+		logger.debug("Account added");
 		Account account = new Account(name);
 		accountServices.add(account);
-		System.out.println(account.toString());
+		logger.debug(account.toString());
 		return account;
 	}
 

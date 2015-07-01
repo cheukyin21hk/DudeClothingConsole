@@ -12,11 +12,13 @@ Ext.onReady(function() {
 	purchaseStore.load();
 	orderStore.load();
 
-	var mainContainer = Ext.create('Ext.tab.Panel', {
+
+
+	var mainPanel = Ext.create('Ext.tab.Panel', {
 		width : 1030,
 		height : 630,
+		renderTo: 'grid',
 		bodyPadding : 15,
-		renderTo : 'grid',
 		items : [ {
 			title : "Stock",
 			items : stockPanel

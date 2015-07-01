@@ -15,7 +15,6 @@ public class Brand {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long brandId;
-
 	private String name;
 
 	public Brand() {

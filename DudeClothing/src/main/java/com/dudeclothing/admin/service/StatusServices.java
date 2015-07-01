@@ -28,4 +28,9 @@ public class StatusServices {
 	public void add(Status status) {
 		statusRepo.saveAndFlush(status);
 	}
+
+	@Transactional
+	public Status findStatusById(long statusId) {
+		return statusRepo.findOne(statusId);
+	}
 }

@@ -18,18 +18,7 @@ public class Purchase {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int purchaseId;
-	@ManyToOne
-	@JoinColumn(name = "currencyId")
-	private Currency currency;
-	public Currency getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(Currency currency) {
-		this.currency = currency;
-	}
-
+	private long purchaseId;
 	private float currencyPrice;
 	private Date date;
 	private float foreignShipCost;
@@ -39,14 +28,26 @@ public class Purchase {
 	private int quantity;
 	private int trackingNo;
 
+	@ManyToOne
+	@JoinColumn(name = "currencyId")
+	private Currency currency;
+
+	public Currency getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(Currency currency) {
+		this.currency = currency;
+	}
+
 	public Purchase() {
 	}
 
-	public int getPurchaseId() {
+	public long getPurchaseId() {
 		return this.purchaseId;
 	}
 
-	public void setPurchaseId(int purchaseId) {
+	public void setPurchaseId(long purchaseId) {
 		this.purchaseId = purchaseId;
 	}
 

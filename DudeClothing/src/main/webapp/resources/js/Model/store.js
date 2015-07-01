@@ -1,6 +1,3 @@
-/**
- * 
- */
 	// create the Data Store for each basic info
 	var accountStore = Ext.create('Ext.data.Store', {
 		autoLoad : true,

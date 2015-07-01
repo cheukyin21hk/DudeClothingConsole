@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 /**
  * The persistent class for the order database table.
@@ -16,49 +18,53 @@ public class OrderRecord {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int orderRecordId;
-
-	private int accountId;
-
-	private int statusId;
-
-	private int clientId;
-
+	private long orderRecordId;
 	private float deposit;
-
 	private Date depositeDate;
-
 	private Date orderRecordDate;
-
 	private float price;
 
-	private int stockId;
+	@ManyToOne
+	@JoinColumn(name = "accountId")
+	private Account account;
+
+	@ManyToOne
+	@JoinColumn(name = "statusId")
+	private Status status;
+
+	@ManyToOne
+	@JoinColumn(name = "clientId")
+	private Client client;
+
+	@ManyToOne
+	@JoinColumn(name = "stockId")
+	private Stock stock;
 
 	public OrderRecord() {
 	}
 
-	public int getAccountId() {
-		return accountId;
+	public Account getAccount() {
+		return account;
 	}
 
-	public void setAccountId(int accountId) {
-		this.accountId = accountId;
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
-	public int getStatusId() {
-		return statusId;
+	public Status getStatus() {
+		return status;
 	}
 
-	public void setStatusId(int statusId) {
-		this.statusId = statusId;
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
-	public int getClientId() {
-		return this.clientId;
+	public Client getClient() {
+		return this.client;
 	}
 
-	public void setClientId(int clientId) {
-		this.clientId = clientId;
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	public float getDeposit() {
@@ -77,11 +83,11 @@ public class OrderRecord {
 		this.depositeDate = depositeDate;
 	}
 
-	public int getOrderRecordId() {
+	public long getOrderRecordId() {
 		return orderRecordId;
 	}
 
-	public void setOrderRecordId(int orderRecordId) {
+	public void setOrderRecordId(long orderRecordId) {
 		this.orderRecordId = orderRecordId;
 	}
 
@@ -101,12 +107,12 @@ public class OrderRecord {
 		this.price = price;
 	}
 
-	public int getStockId() {
-		return this.stockId;
+	public Stock getStock() {
+		return this.stock;
 	}
 
-	public void setStockId(int stockId) {
-		this.stockId = stockId;
+	public void setStock(Stock stock) {
+		this.stock = stock;
 	}
 
 }

@@ -17,9 +17,7 @@ public class Currency {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long currencyId;
-
 	private String name;
-
 	private float rate;
 
 	public Currency() {

@@ -2,6 +2,31 @@
  * 
  */
 
+function returnBrandId(val) {
+	return val.brandId + "";
+};
+
+function returnPurchaseId(val) {
+	return val.purchaseId + "";
+};
+
+function returnCurrencyName(val) {
+	return val.name + "";
+};
+
+function returnAccountName(val) {
+	return val.name + "";
+};
+function returnClientName(val) {
+	return val.name + "";
+};
+function returnStockName(val) {
+	return val.name + "";
+};
+function returnStatusName(val) {
+	return val.name + "";
+};
+
 // create the grid
 var accountGrid = Ext.create('Ext.grid.Panel', {
 	width : 1000,
@@ -163,9 +188,9 @@ var stockGrid = Ext.create('Ext.grid.Panel', {
 		sortable : true,
 		autoSizeColumn : true,
 	}, {
-		text : "Brand",
-		dataIndex : 'brandId',
-		autoSizeColumn : true,
+		text : 'brand',
+		renderer : returnBrandId,
+		dataIndex : 'brand',
 	}, {
 		text : "Size",
 		dataIndex : "size"
@@ -179,7 +204,8 @@ var stockGrid = Ext.create('Ext.grid.Panel', {
 		autoSizeColumn : true,
 	}, {
 		text : "Purchase",
-		dataIndex : "purchaseId",
+		renderer : returnPurchaseId,
+		dataIndex : "purchase",
 		autoSizeColumn : true,
 	} ],
 	viewConfig : {
@@ -202,7 +228,7 @@ var orderGrid = Ext.create('Ext.grid.Panel', {
 	store : orderStore,
 	columns : [ {
 		text : "Code",
-		dataIndex : 'orderId',
+		dataIndex : 'orderRecordId',
 		sortable : true,
 		autoSizeColumn : true,
 	}, {
@@ -211,19 +237,29 @@ var orderGrid = Ext.create('Ext.grid.Panel', {
 		autoSizeColumn : true,
 	}, {
 		text : "Order Date",
-		dataIndex : "orderDate",
+		dataIndex : "orderRecordDate",
+		renderer : function(value) {
+			var date = Ext.Date.parse(value, 'time');
+			return Ext.Date.format(date, 'd/m/Y');
+		},
 		autoSizeColumn : true,
 	}, {
 		text : "Deposite Date",
 		dataIndex : "depositeDate",
+		renderer : function(value) {
+			var date = Ext.Date.parse(value, 'time');
+			return Ext.Date.format(date, 'd/m/Y');
+		},
 		autoSizeColumn : true,
 	}, {
 		text : "Account",
-		dataIndex : "accountId",
+		dataIndex : "account",
+		renderer : returnAccountName,
 		autoSizeColumn : true,
 	}, {
 		text : "Stock",
-		dataIndex : "stockId",
+		dataIndex : "stock",
+		renderer : returnStockName,
 		autoSizeColumn : true,
 	}, {
 		text : "Deposit",
@@ -231,11 +267,13 @@ var orderGrid = Ext.create('Ext.grid.Panel', {
 		autoSizeColumn : true,
 	}, {
 		text : "Status",
-		dataIndex : "statusId",
+		dataIndex : "status",
+		renderer : returnStatusName,
 		autoSizeColumn : true,
 	}, {
 		text : "Client",
-		dataIndex : "clientId",
+		dataIndex : "client",
+		renderer : returnClientName,
 		autoSizeColumn : true,
 	} ],
 	viewConfig : {
@@ -263,6 +301,10 @@ var purchaseGrid = Ext.create('Ext.grid.Panel', {
 	}, {
 		text : "Date",
 		dataIndex : 'date',
+		renderer : function(value) {
+			var date = Ext.Date.parse(value, 'time');
+			return Ext.Date.format(date, 'd/m/Y');
+		},
 		autoSizeColumn : true,
 	}, {
 		text : "Quantity",
@@ -270,7 +312,8 @@ var purchaseGrid = Ext.create('Ext.grid.Panel', {
 		autoSizeColumn : true,
 	}, {
 		text : "Currency",
-		dataIndex : "currencyId",
+		dataIndex : "currency",
+		renderer : returnCurrencyName,
 		autoSizeColumn : true,
 	}, {
 		text : "Currency Price",

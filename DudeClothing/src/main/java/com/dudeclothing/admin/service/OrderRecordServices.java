@@ -25,7 +25,12 @@ public class OrderRecordServices {
 	}
 
 	@Transactional
-	public void add(OrderRecord order) {
-		ordersRepo.saveAndFlush(order);
+	public OrderRecord add(OrderRecord order) {
+		return ordersRepo.saveAndFlush(order);
+	}
+
+	@Transactional
+	public OrderRecord findOrderRecordById(long orderId) {
+		return ordersRepo.findOne(orderId);
 	}
 }

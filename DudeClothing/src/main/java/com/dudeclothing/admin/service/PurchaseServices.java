@@ -29,4 +29,10 @@ public class PurchaseServices {
 		Purchase result = purchaseRepo.saveAndFlush(purchase);
 		return result;
 	}
+
+	@Transactional
+	public Purchase findPurchaseById(long purchaseId) {
+
+		return purchaseRepo.findOne(purchaseId);
+	}
 }

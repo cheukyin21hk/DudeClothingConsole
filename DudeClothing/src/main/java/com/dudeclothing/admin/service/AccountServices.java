@@ -20,12 +20,16 @@ public class AccountServices {
 
 	@Transactional
 	public List<Account> getAll() {
-		List<Account> result = accountRepo.findAll();
-		return result;
+		return accountRepo.findAll();
 	}
 
 	@Transactional
 	public void add(Account account) {
 		accountRepo.saveAndFlush(account);
+	}
+
+	@Transactional
+	public Account findAccountById(long accountId) {
+		return accountRepo.findOne(accountId);
 	}
 }

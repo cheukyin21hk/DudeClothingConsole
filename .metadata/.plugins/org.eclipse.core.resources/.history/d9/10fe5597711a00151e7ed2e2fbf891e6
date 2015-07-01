@@ -1,0 +1,47 @@
+package com.dudeclothing.admin.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.dudeclothing.admin.model.OrderRecord;
+import com.dudeclothing.admin.model.Purchase;
+import com.dudeclothing.admin.model.Stock;
+import com.dudeclothing.admin.service.BrandServices;
+import com.dudeclothing.admin.service.CurrencyServices;
+import com.dudeclothing.admin.service.PurchaseServices;
+import com.dudeclothing.admin.service.StockServices;
+
+@Controller
+@RequestMapping(value = "transaction")
+public class TransactionController {
+	@Autowired
+	private PurchaseServices purchaseServices;
+	@Autowired
+	private StockServices stockServices;
+	@Autowired
+	private BrandServices brandServices;
+	@Autowired
+	private CurrencyServices currencyServices;
+
+	@RequestMapping(value = "/addPurchase", method = RequestMethod.GET)
+	@ResponseBody
+	public Purchase addPurchase() {
+		return null;
+	}
+	
+	@RequestMapping(value = "/addOrder", method = RequestMethod.GET)
+	@ResponseBody
+	public OrderRecord addOrderRecord() {
+		return null;
+	}
+	
+	@RequestMapping(value = "/addStock", method = RequestMethod.GET)
+	@ResponseBody
+	public Stock addStock() {
+		return null;
+	}
+	
+}

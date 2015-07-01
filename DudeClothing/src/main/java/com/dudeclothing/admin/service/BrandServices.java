@@ -30,7 +30,7 @@ public class BrandServices {
 	}
 	
 	@Transactional
-	public Brand getBrandById(Long brandId){
+	public Brand findBrandById(Long brandId){
 		return brandRepo.findOne(brandId);
 	}
 }
