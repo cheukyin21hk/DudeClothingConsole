@@ -1,5 +1,18 @@
 /**
- * 
+ * 	plugins: [
+		Ext.create('Ext.grid.plugin.RowEditing', {
+			clicksToEdit: 2,
+			listeners: {
+				edit: function(e){
+					Ext.Ajax.request({
+						url: 'index.php/issue/update/' + e.record.get('reportID'),
+						params: e.record.getChanges(),
+						success: function(){}
+					})
+				}
+			}
+		})
+	],
  */
 
 function returnBrandId(val) {
@@ -41,6 +54,10 @@ var accountGrid = Ext.create('Ext.grid.Panel', {
 		text : "Name",
 		dataIndex : 'name',
 		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	} ],
 	viewConfig : {
 		listeners : {
@@ -52,6 +69,7 @@ var accountGrid = Ext.create('Ext.grid.Panel', {
 			}
 		}
 	},
+	plugins : [ accountEditing ],
 	split : true,
 });
 
@@ -68,6 +86,10 @@ var brandGrid = Ext.create('Ext.grid.Panel', {
 		text : "Name",
 		dataIndex : 'name',
 		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	} ],
 	viewConfig : {
 		listeners : {
@@ -79,6 +101,7 @@ var brandGrid = Ext.create('Ext.grid.Panel', {
 			}
 		}
 	},
+	plugins : [ brandEditing ],
 	split : true,
 });
 
@@ -95,10 +118,18 @@ var clientGrid = Ext.create('Ext.grid.Panel', {
 		text : "Name",
 		dataIndex : 'name',
 		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	}, {
 		text : "Phone Number",
 		dataIndex : "phoneNo",
 		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	} ],
 	viewConfig : {
 		listeners : {
@@ -110,6 +141,7 @@ var clientGrid = Ext.create('Ext.grid.Panel', {
 			}
 		}
 	},
+	plugins : [ clientEditing ],
 	split : true,
 
 });
@@ -123,15 +155,23 @@ var currencyGrid = Ext.create('Ext.grid.Panel', {
 		dataIndex : 'currencyId',
 		sortable : true,
 		autoSizeColumn : true,
+
 	}, {
 		text : "Name",
 		dataIndex : 'name',
 		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	}, {
 		text : "Rate",
 		dataIndex : 'rate',
 		autoSizeColumn : true,
-
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	} ],
 	viewConfig : {
 		listeners : {
@@ -143,6 +183,7 @@ var currencyGrid = Ext.create('Ext.grid.Panel', {
 			}
 		}
 	},
+	plugins : [ currencyEditing ],
 	split : true,
 
 });
@@ -160,6 +201,10 @@ var statusGrid = Ext.create('Ext.grid.Panel', {
 		text : "Name",
 		dataIndex : 'name',
 		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	} ],
 	viewConfig : {
 		listeners : {
@@ -171,6 +216,7 @@ var statusGrid = Ext.create('Ext.grid.Panel', {
 			}
 		}
 	},
+	plugins : [ statusEditing ],
 	split : true,
 
 });
@@ -193,20 +239,33 @@ var stockGrid = Ext.create('Ext.grid.Panel', {
 		dataIndex : 'brand',
 	}, {
 		text : "Size",
-		dataIndex : "size"
+		dataIndex : "size",
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	}, {
 		text : "Name",
 		dataIndex : "name",
 		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	}, {
 		text : "Sold",
 		dataIndex : "sold",
 		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	}, {
 		text : "Purchase",
 		renderer : returnPurchaseId,
 		dataIndex : "purchase",
 		autoSizeColumn : true,
+
 	} ],
 	viewConfig : {
 		listeners : {
@@ -218,6 +277,7 @@ var stockGrid = Ext.create('Ext.grid.Panel', {
 			}
 		}
 	},
+	plugins : [ stockEditing ],
 	split : true,
 
 });
@@ -235,14 +295,26 @@ var orderGrid = Ext.create('Ext.grid.Panel', {
 		text : "Price",
 		dataIndex : 'price',
 		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	}, {
 		text : "Order Date",
+
 		dataIndex : "orderRecordDate",
 		renderer : function(value) {
 			var date = Ext.Date.parse(value, 'time');
 			return Ext.Date.format(date, 'd/m/Y');
+
 		},
 		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			xtype : 'datefield',
+			format : 'm/d/Y',
+			allowBlank : false
+		}
 	}, {
 		text : "Deposite Date",
 		dataIndex : "depositeDate",
@@ -251,6 +323,10 @@ var orderGrid = Ext.create('Ext.grid.Panel', {
 			return Ext.Date.format(date, 'd/m/Y');
 		},
 		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	}, {
 		text : "Account",
 		dataIndex : "account",
@@ -265,6 +341,10 @@ var orderGrid = Ext.create('Ext.grid.Panel', {
 		text : "Deposit",
 		dataIndex : "deposit",
 		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	}, {
 		text : "Status",
 		dataIndex : "status",
@@ -286,6 +366,7 @@ var orderGrid = Ext.create('Ext.grid.Panel', {
 			}
 		}
 	},
+	plugins : [ orderEditing ],
 	split : true,
 
 });
@@ -297,7 +378,7 @@ var purchaseGrid = Ext.create('Ext.grid.Panel', {
 	columns : [ {
 		text : "Code",
 		dataIndex : 'purchaseId',
-		sortable : true
+		sortable : true,
 	}, {
 		text : "Date",
 		dataIndex : 'date',
@@ -306,10 +387,18 @@ var purchaseGrid = Ext.create('Ext.grid.Panel', {
 			return Ext.Date.format(date, 'd/m/Y');
 		},
 		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	}, {
 		text : "Quantity",
 		dataIndex : "quantity",
 		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	}, {
 		text : "Currency",
 		dataIndex : "currency",
@@ -319,26 +408,50 @@ var purchaseGrid = Ext.create('Ext.grid.Panel', {
 		text : "Currency Price",
 		dataIndex : "currencyPrice",
 		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	}, {
 		text : "Foreign Shipping Cost",
 		dataIndex : "foreignShipCost",
 		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	}, {
 		text : "Local Shipping Cost",
 		dataIndex : "localShipCost",
 		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	}, {
 		text : "Logit. Code",
 		dataIndex : "logisticCode",
 		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	}, {
 		text : "Tracking No.",
 		dataIndex : "trackingNo",
 		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	}, {
 		text : "Invoice Code",
 		dataIndex : "invoice",
 		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
 	} ],
 	viewConfig : {
 		listeners : {
@@ -350,7 +463,7 @@ var purchaseGrid = Ext.create('Ext.grid.Panel', {
 			}
 		}
 	},
-
+	plugins : [ purchaseEditing ],
 	split : true,
 
 });

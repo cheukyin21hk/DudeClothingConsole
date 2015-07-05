@@ -13,12 +13,14 @@
 <script type="text/javascript"
 	src="<c:url value="/resources/extjs/ext-theme-crisp.js"/>"></script>
 <script type="text/javascript"
+	src="<c:url value="/resources/js/Editing/editPlugin.js"/>"></script>
+<script type="text/javascript"
 	src="<c:url value="/resources/js/Model/model.js"/>"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/Model/store.js"/>"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/Grid/grid.js"/>"></script>
-	<script type="text/javascript"
+<script type="text/javascript"
 	src="<c:url value="/resources/js/UIComponent/dropdownList.js"/>"></script>
 <script type="text/javascript"
 	src="<c:url value="/resources/js/Form/form.js"/>"></script>
