@@ -6,7 +6,7 @@
 	</section>
 	<section name="org.eclipse.ui.dialogs.FilteredResourcesSelectionDialog">
 		<item value="true" key="ShowStatusLine"/>
-		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0A;&lt;History&gt;&#x0A;&lt;historyRootNode/&gt;&#x0A;&lt;/History&gt;" key="History"/>
+		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0A;&lt;History&gt;&#x0A;&lt;historyRootNode&gt;&#x0A;&lt;infoNode path=&quot;/DudeClothing/src/main/webapp/resources/js/Model/store.js&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;infoNode path=&quot;/DudeClothing/src/main/webapp/resources/js/Grid/grid.js&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;infoNode path=&quot;/DudeClothing/src/main/webapp/resources/js/test.js&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;infoNode path=&quot;/DudeClothing/src/main/webapp/resources/js/Form/form.js&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;infoNode path=&quot;/DudeClothing/src/main/webapp/resources/js/Panel/panel.js&quot; type=&quot;1&quot;/&gt;&#x0A;&lt;/historyRootNode&gt;&#x0A;&lt;/History&gt;" key="History"/>
 		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0A;&lt;workingSet workingSetName=&quot;&quot;/&gt;" key="WorkingSet"/>
 		<item value="false" key="ShowDerived"/>
 		<section name="DialogBoundsSettings">

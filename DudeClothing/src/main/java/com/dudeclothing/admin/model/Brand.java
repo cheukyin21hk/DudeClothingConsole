@@ -14,18 +14,18 @@ public class Brand {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long brandId;
+	private long id;
 	private String name;
 
 	public Brand() {
 	}
 
-	public long getBrandId() {
-		return this.brandId;
+	public long getId() {
+		return this.id;
 	}
 
-	public void setBrandId(long brandId) {
-		this.brandId = brandId;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getName() {

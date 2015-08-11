@@ -14,18 +14,18 @@ public class Status {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long statusId;
+	private long id;
 	private String name;
 
 	public Status() {
 	}
 
-	public long getStatusId() {
-		return this.statusId;
+	public long getId() {
+		return this.id;
 	}
 
-	public void setStatusId(long statusId) {
-		this.statusId = statusId;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getName() {

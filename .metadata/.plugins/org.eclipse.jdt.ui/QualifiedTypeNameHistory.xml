@@ -17,7 +17,6 @@
 <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
 <fullyQualifiedTypeName name="com.dudeclothing.admin.dataRepo.TestObjectRepository"/>
 <fullyQualifiedTypeName name="javax.persistence.Entity"/>
-<fullyQualifiedTypeName name="javax.persistence.Id"/>
 <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
 <fullyQualifiedTypeName name="com.dudeclothing.admin.model.Order"/>
 <fullyQualifiedTypeName name="org.hibernate.annotations.common.util.impl.Log_.logger"/>
@@ -33,4 +32,10 @@
 <fullyQualifiedTypeName name="org.apache.log4j.Logger"/>
 <fullyQualifiedTypeName name="com.dudeclothing.admin.service.StatusServices"/>
 <fullyQualifiedTypeName name="com.dudeclothing.admin.model.Status"/>
+<fullyQualifiedTypeName name="com.dudeclothing.admin.model.PurchaseOrder"/>
+<fullyQualifiedTypeName name="com.dudeclothing.admin.dataRepo.PurchaseItemRepo"/>
+<fullyQualifiedTypeName name="com.dudeclothing.admin.model.SaleItem"/>
+<fullyQualifiedTypeName name="org.springframework.data.annotation.Id"/>
+<fullyQualifiedTypeName name="javax.persistence.Id"/>
+<fullyQualifiedTypeName name="com.dudeclothing.admin.model.Brand"/>
 </qualifiedTypeNameHistroy>

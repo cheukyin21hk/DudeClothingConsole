@@ -24,7 +24,9 @@ public class AccountController {
 	@RequestMapping(value = "/accounts", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Account> listAll(Model model) {
-		logger.debug("Account list all is called");
+		if (logger.isDebugEnabled()) {
+			logger.debug("Account list all is called");
+		}
 		List<Account> list = accountServices.getAll();
 		return list;
 	}
@@ -32,10 +34,14 @@ public class AccountController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	@ResponseBody
 	public Account addAccount(@RequestParam(value = "name") String name) {
-		logger.debug("Account added");
+		if (logger.isDebugEnabled()) {
+			logger.debug("Account added");
+		}
 		Account account = new Account(name);
 		accountServices.add(account);
-		logger.debug(account.toString());
+		if (logger.isDebugEnabled()) {
+			logger.debug(account.toString());
+		}
 		return account;
 	}
 

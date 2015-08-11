@@ -1,0 +1,68 @@
+Ext.require([ 'Ext.grid.*', 'Ext.data.*', 'Ext.panel.*',
+	'Ext.layout.container.Border' ]);
+
+Ext.onReady(function() {
+
+	accountStore.load();
+	brandStore.load();
+	statusStore.load();
+	currencyStore.load();
+	clientStore.load();
+	// stockStore.load();
+	itemStore.load();
+
+	var mainPanel = Ext.create('Ext.tab.Panel', {
+		width : 1030,
+		height : 630,
+		renderTo : 'grid',
+		bodyPadding : 15,
+		items : [
+
+		{
+			title : "Stock",
+			items : stockPanel
+		},
+		{
+			title : "Sale",
+			items : saleOrderPanel
+		}, 
+		{
+			title : "Purchase Order",
+			items : purchaseOrderPanel
+		}, {
+			title : "Purchase Shipment",
+			items : purchaseShipmentPanel
+		},{
+			title : "Purchase Item",
+			items : purchaseItemPanel
+		},{
+			title : "item",
+			items : itemPanel
+		}, {
+			title : "Client",
+			items : clientPanel
+		}, {
+			title : 'Account',
+			items : accountPanel
+		}, {
+			title : 'Currency',
+			items : currecnyPanel
+		}, {
+			title : 'Brand',
+			items : brandPanel
+		}, {
+			title : 'Status',
+			items : statusPanel
+		}
+
+//		 {
+//		 title:'Data grid View',
+//		 items : viewPanel
+//		 },
+//		 {
+//		 title:'Data Entry',
+//		 items : entryPanel
+//		 }
+]
+});
+});

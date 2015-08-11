@@ -1,38 +1,51 @@
 /**
  * 
  */
-var accountDropdown = Ext.create('Ext.form.ComboBox', {
-	fieldLabel : 'Choose a Account',
-	store : accountStore,
-	queryMode : 'remote',
-	displayField : 'name',
-	valueField : 'accountId',
-	name : 'accountId'
-});
+ Ext.define('com.dudeClothing.AccountDropdown', {
+ 	extend: 'Ext.form.ComboBox',
+ 	xtype: 'dudeAccountDropdown',
+ 	fieldLabel : 'Choose a Account',
+ 	store : accountStore,
+ 	queryMode : 'remote',
+ 	displayField : 'name',
+ 	valueField : 'id',
+ 	name : 'accountId'
 
-var statusDropdown = Ext.create('Ext.form.ComboBox', {
-	fieldLabel : 'Choose a Status',
-	store : statusStore,
-	queryMode : 'remote',
-	displayField : 'name',
-	valueField : 'statusId',
-	name : 'statusId'
-});
+ });
 
-var currencyDropdown = Ext.create('Ext.form.ComboBox', {
-	fieldLabel : 'Choose a Currency',
-	store : currencyStore,
-	queryMode : 'remote',
-	displayField : 'name',
-	valueField : 'currencyId',
-	name : 'currencyId'
-});
+ Ext.define('com.dudeClothing.StatusDropdown', {
+ 	extend: 'Ext.form.ComboBox',
+ 	xtype: 'dudeStatusDropdown',
+ 	fieldLabel : 'Choose a Status',
+ 	store : statusStore,
+ 	queryMode : 'remote',
+ 	displayField : 'name',
+ 	valueField : 'id',
+ 	name : 'statusId'
 
-var brandDropdown = Ext.create('Ext.form.ComboBox', {
-	fieldLabel : 'Choose a brand',
-	store : brandStore,
-	name : 'brandId',
-	queryMode : 'remote',
-	displayField : 'name',
-	valueField : 'brandId',
-});
+ });
+
+ Ext.define('com.dudeClothing.CurrencyDropdown', {
+ 	extend: 'Ext.form.ComboBox',
+ 	xtype: 'dudeCurrencyDropdown',
+ 	fieldLabel : 'Choose a Currency',
+ 	store : currencyStore,
+ 	queryMode : 'remote',
+ 	displayField : 'name',
+ 	valueField : 'id',
+ 	name : 'currencyId'
+
+ });
+
+ Ext.define('com.dudeClothing.BrandDropdown', {
+ 	extend: 'Ext.form.ComboBox',
+ 	xtype: 'dudeBrandDropdown',
+ 	fieldLabel : 'Choose a brand',
+ 	store : brandStore,
+ 	queryMode : 'remote',
+ 	displayField : 'name',
+ 	valueField : 'id',
+ 	name : 'brandId'
+ });
+
+

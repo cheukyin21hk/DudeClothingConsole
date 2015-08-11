@@ -8,26 +8,26 @@ Ext.onReady(function() {
 	statusStore.load();
 	currencyStore.load();
 	clientStore.load();
-	stockStore.load();
-	purchaseStore.load();
-	orderStore.load();
-
-
+	itemStore.load();
 
 	var mainPanel = Ext.create('Ext.tab.Panel', {
 		width : 1030,
-		height : 630,
-		renderTo: 'grid',
+		renderTo : 'grid',
 		bodyPadding : 15,
-		items : [ {
+		items : [
+
+		{
 			title : "Stock",
 			items : stockPanel
 		}, {
-			title : "Order",
-			items : orderPanel
+			title : "Sale",
+			items : saleOrderPanel
 		}, {
 			title : "Purchase",
-			items : purchasePanel
+			items : purchaseOrderPanel
+		}, {
+			title : "item",
+			items : itemPanel
 		}, {
 			title : "Client",
 			items : clientPanel

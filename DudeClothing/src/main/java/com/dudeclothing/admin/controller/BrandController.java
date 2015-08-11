@@ -2,6 +2,7 @@ package com.dudeclothing.admin.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,13 +17,18 @@ import com.dudeclothing.admin.service.BrandServices;
 @Controller
 @RequestMapping("brand")
 public class BrandController {
+
+	private final Logger logger = Logger.getLogger(BrandController.class);
+
 	@Autowired
 	private BrandServices brandServices;
 
 	@RequestMapping(value = "/brands", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Brand> listAll(Model model) {
-		System.out.println("Brand list all is called");
+		if (logger.isInfoEnabled()) {
+			logger.info("Brand list all is called");
+		}
 		List<Brand> list = brandServices.getAll();
 		return list;
 	}
@@ -30,11 +36,15 @@ public class BrandController {
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	@ResponseBody
 	public Brand addBrand(@RequestParam(value = "name") String name) {
-		System.out.println("Brand added");
+		if (logger.isInfoEnabled()) {
+			logger.info("Brand added");
+		}
 		Brand brand = new Brand();
 		brand.setName(name);
 		brandServices.add(brand);
-		System.out.println(brand.toString());
+		if (logger.isInfoEnabled()) {
+			logger.info(brand.toString());
+		}
 		return brand;
 	}
 

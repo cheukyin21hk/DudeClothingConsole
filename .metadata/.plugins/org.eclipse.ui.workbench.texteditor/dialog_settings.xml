@@ -6,37 +6,37 @@
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="purchase" key="selection"/>
+		<item value="purchaseFormSubPanel" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
-			<item value="purchase"/>
-			<item value="order"/>
-			<item value="system"/>
+			<item value="purchaseFormSubPanel"/>
+			<item value="dudePurchaseTransaction"/>
 			<item value="Purchase"/>
-			<item value="return"/>
-			<item value="susp"/>
-			<item value="stock"/>
-			<item value="."/>
+			<item value="purchase"/>
+			<item value="purchaseShip"/>
+			<item value="sale"/>
+			<item value="purcahse"/>
+			<item value="dudeSaleOrderForm"/>
 		</list>
 		<list key="replacehistory">
 			<item value=""/>
-			<item value="forcefit : true,"/>
-			<item value="forceFit : false,"/>
-			<item value="forceFit : true,"/>
-			<item value="1000"/>
-			<item value="Order"/>
-			<item value="order"/>
-			<item value="purchase"/>
+			<item value="currency"/>
+			<item value="returnId"/>
+			<item value="item"/>
+			<item value="Item"/>
+			<item value="itemId"/>
+			<item value="brandId"/>
+			<item value="itemRepo"/>
 		</list>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="265" key="DIALOG_WIDTH"/>
 		<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
 		<item value="399" key="DIALOG_HEIGHT"/>
-		<item value="121" key="DIALOG_X_ORIGIN"/>
-		<item value="112" key="DIALOG_Y_ORIGIN"/>
+		<item value="87" key="DIALOG_X_ORIGIN"/>
+		<item value="58" key="DIALOG_Y_ORIGIN"/>
 	</section>
 </section>

@@ -16,19 +16,19 @@ public class Currency {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long currencyId;
+	private long id;
 	private String name;
 	private float rate;
 
 	public Currency() {
 	}
 
-	public long getCurrencyId() {
-		return this.currencyId;
+	public long getId() {
+		return this.id;
 	}
 
-	public void setCurrencyId(long currencyId) {
-		this.currencyId = currencyId;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getName() {

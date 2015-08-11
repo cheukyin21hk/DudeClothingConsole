@@ -1,42 +1,15 @@
 /**
- * 	plugins: [
-		Ext.create('Ext.grid.plugin.RowEditing', {
-			clicksToEdit: 2,
-			listeners: {
-				edit: function(e){
-					Ext.Ajax.request({
-						url: 'index.php/issue/update/' + e.record.get('reportID'),
-						params: e.record.getChanges(),
-						success: function(){}
-					})
-				}
-			}
-		})
-	],
- */
+ * plugins: [ Ext.create('Ext.grid.plugin.RowEditing', { clicksToEdit: 2,
+ * listeners: { edit: function(e){ Ext.Ajax.request({ url:
+ * 'index.php/issue/update/' + e.record.get('reportID'), params:
+ * e.record.getChanges(), success: function(){} }) } } }) ],
+*/
 
-function returnBrandId(val) {
-	return val.brandId + "";
+function returnId(val) {
+	return val.id + "";
 };
 
-function returnPurchaseId(val) {
-	return val.purchaseId + "";
-};
-
-function returnCurrencyName(val) {
-	return val.name + "";
-};
-
-function returnAccountName(val) {
-	return val.name + "";
-};
-function returnClientName(val) {
-	return val.name + "";
-};
-function returnStockName(val) {
-	return val.name + "";
-};
-function returnStatusName(val) {
+function returnName(val) {
 	return val.name + "";
 };
 
@@ -47,7 +20,7 @@ var accountGrid = Ext.create('Ext.grid.Panel', {
 	store : accountStore,
 	columns : [ {
 		text : "Code",
-		dataIndex : 'accountId',
+		dataIndex : 'id',
 		sortable : true,
 		autoSizeColumn : true,
 	}, {
@@ -73,13 +46,53 @@ var accountGrid = Ext.create('Ext.grid.Panel', {
 	split : true,
 });
 
+var itemGrid = Ext.create('Ext.grid.Panel', {
+	width : 1000,
+	bufferedRenderer : false,
+	store : itemStore,
+	columns : [ {
+		text : "Code",
+		dataIndex : 'id',
+		sortable : true,
+		autoSizeColumn : true,
+	}, {
+		text : "brand",
+		dataIndex : 'brandId',
+		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
+	}, {
+		text : "Name",
+		dataIndex : 'name',
+		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
+	} ],
+	viewConfig : {
+		listeners : {
+			refresh : function(dataview) {
+				Ext.each(dataview.panel.columns, function(column) {
+					if (column.autoSizeColumn === true)
+						column.autoSize();
+				})
+			}
+		}
+	},
+	plugins : [ itemEditing ],
+	split : true,
+});
+
 var brandGrid = Ext.create('Ext.grid.Panel', {
 	width : 1000,
 	bufferedRenderer : false,
 	store : brandStore,
 	columns : [ {
 		text : "Code",
-		dataIndex : 'brandId',
+		dataIndex : 'id',
 		sortable : true,
 		autoSizeColumn : true,
 	}, {
@@ -111,7 +124,7 @@ var clientGrid = Ext.create('Ext.grid.Panel', {
 	store : clientStore,
 	columns : [ {
 		text : "Code",
-		dataIndex : 'clientId',
+		dataIndex : 'id',
 		sortable : true,
 		autoSizeColumn : true,
 	}, {
@@ -152,7 +165,7 @@ var currencyGrid = Ext.create('Ext.grid.Panel', {
 	store : currencyStore,
 	columns : [ {
 		text : "Code",
-		dataIndex : 'currencyId',
+		dataIndex : 'id',
 		sortable : true,
 		autoSizeColumn : true,
 
@@ -194,7 +207,7 @@ var statusGrid = Ext.create('Ext.grid.Panel', {
 	store : statusStore,
 	columns : [ {
 		text : "Code",
-		dataIndex : 'statusId',
+		dataIndex : 'id',
 		sortable : true,
 		autoSizeColumn : true,
 	}, {
@@ -227,15 +240,15 @@ var stockGrid = Ext.create('Ext.grid.Panel', {
 	autoScroll : true,
 	columnLines : true,
 	region : 'center',
-	store : stockStore,
+	// store : stockStore,
 	columns : [ {
 		text : "Code",
-		dataIndex : 'stockId',
+		dataIndex : 'id',
 		sortable : true,
 		autoSizeColumn : true,
 	}, {
 		text : 'brand',
-		renderer : returnBrandId,
+		renderer : returnId,
 		dataIndex : 'brand',
 	}, {
 		text : "Size",
@@ -262,7 +275,7 @@ var stockGrid = Ext.create('Ext.grid.Panel', {
 		}
 	}, {
 		text : "Purchase",
-		renderer : returnPurchaseId,
+		renderer : returnId,
 		dataIndex : "purchase",
 		autoSizeColumn : true,
 
@@ -282,33 +295,22 @@ var stockGrid = Ext.create('Ext.grid.Panel', {
 
 });
 
-var orderGrid = Ext.create('Ext.grid.Panel', {
+var saleOrderGrid = Ext.create('Ext.grid.Panel', {
 	width : 1000,
 	bufferedRenderer : false,
-	store : orderStore,
+	store : saleOrderStore,
 	columns : [ {
 		text : "Code",
-		dataIndex : 'orderRecordId',
+		dataIndex : 'id',
 		sortable : true,
 		autoSizeColumn : true,
 	}, {
-		text : "Price",
-		dataIndex : 'price',
-		autoSizeColumn : true,
-		editor : {
-			// defaults to textfield if no xtype is supplied
-			allowBlank : false
-		}
-	}, {
 		text : "Order Date",
-
-		dataIndex : "orderRecordDate",
-		renderer : function(value) {
-			var date = Ext.Date.parse(value, 'time');
-			return Ext.Date.format(date, 'd/m/Y');
-
-		},
+		dataIndex : "orderDate",
 		autoSizeColumn : true,
+		renderer : function(value) {
+			return Ext.Date.format(value, 'd-m-Y');
+		},
 		editor : {
 			// defaults to textfield if no xtype is supplied
 			xtype : 'datefield',
@@ -319,10 +321,10 @@ var orderGrid = Ext.create('Ext.grid.Panel', {
 		text : "Deposite Date",
 		dataIndex : "depositeDate",
 		renderer : function(value) {
-			var date = Ext.Date.parse(value, 'time');
-			return Ext.Date.format(date, 'd/m/Y');
+			return Ext.Date.format(value, 'd-m-Y');
 		},
 		autoSizeColumn : true,
+		
 		editor : {
 			// defaults to textfield if no xtype is supplied
 			allowBlank : false
@@ -330,30 +332,25 @@ var orderGrid = Ext.create('Ext.grid.Panel', {
 	}, {
 		text : "Account",
 		dataIndex : "account",
-		renderer : returnAccountName,
-		autoSizeColumn : true,
-	}, {
-		text : "Stock",
-		dataIndex : "stock",
-		renderer : returnStockName,
+		renderer : returnName,
 		autoSizeColumn : true,
 	}, {
 		text : "Deposit",
 		dataIndex : "deposit",
+		autoSizeColumn : true,
+	}, {
+		text : "Status",
+		dataIndex : "status",
+		renderer:returnName,
 		autoSizeColumn : true,
 		editor : {
 			// defaults to textfield if no xtype is supplied
 			allowBlank : false
 		}
 	}, {
-		text : "Status",
-		dataIndex : "status",
-		renderer : returnStatusName,
-		autoSizeColumn : true,
-	}, {
 		text : "Client",
 		dataIndex : "client",
-		renderer : returnClientName,
+		renderer : returnName,
 		autoSizeColumn : true,
 	} ],
 	viewConfig : {
@@ -371,21 +368,26 @@ var orderGrid = Ext.create('Ext.grid.Panel', {
 
 });
 
-var purchaseGrid = Ext.create('Ext.grid.Panel', {
+var saleItemGrid = Ext.create('Ext.grid.Panel', {
 	width : 1000,
 	bufferedRenderer : false,
-	store : purchaseStore,
+	store : saleItemStore,
 	columns : [ {
 		text : "Code",
-		dataIndex : 'purchaseId',
+		dataIndex : 'id',
 		sortable : true,
+		autoSizeColumn : true,
 	}, {
-		text : "Date",
-		dataIndex : 'date',
-		renderer : function(value) {
-			var date = Ext.Date.parse(value, 'time');
-			return Ext.Date.format(date, 'd/m/Y');
-		},
+		text : "Price",
+		dataIndex : 'price',
+		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
+	}, {
+		text : "Size",
+		dataIndex : 'size',
 		autoSizeColumn : true,
 		editor : {
 			// defaults to textfield if no xtype is supplied
@@ -393,7 +395,74 @@ var purchaseGrid = Ext.create('Ext.grid.Panel', {
 		}
 	}, {
 		text : "Quantity",
-		dataIndex : "quantity",
+		dataIndex : 'quantity',
+		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
+
+	}, {
+		text : "Deliver",
+		dataIndex : 'delivered',
+		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
+	}, {
+		text : "Sale Order Code",
+		dataIndex : 'saleOrder',
+		renderer: returnId,
+		autoSizeColumn : true,
+		editor : {
+		}
+	},{
+		text : "Purchase Order Code",
+		dataIndex : 'purchaseOrder',
+		renderer: returnId,
+		autoSizeColumn : true,
+		editor : {
+		}
+	} ,{
+		text : "Item",
+		dataIndex : 'item',
+		renderer:returnName,
+		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
+	} ],
+	viewConfig : {
+		listeners : {
+			refresh : function(dataview) {
+				Ext.each(dataview.panel.columns, function(column) {
+					if (column.autoSizeColumn === true)
+						column.autoSize();
+				})
+			}
+		}
+	},
+	plugins : [ orderEditing ],
+	split : true,
+
+});
+
+var purchaseOrderGrid = Ext.create('Ext.grid.Panel', {
+	width : 1000,
+	bufferedRenderer : false,
+	store : purchaseOrderStore,
+	columns : [ {
+		text : "Code",
+		dataIndex : 'id',
+		sortable : true,
+	}, {
+		text : "Purchase Date",
+		dataIndex : 'purchaseDate',
+		renderer : function(value) {
+			return Ext.Date.format(value, 'd-m-Y');
+		},
 		autoSizeColumn : true,
 		editor : {
 			// defaults to textfield if no xtype is supplied
@@ -402,51 +471,11 @@ var purchaseGrid = Ext.create('Ext.grid.Panel', {
 	}, {
 		text : "Currency",
 		dataIndex : "currency",
-		renderer : returnCurrencyName,
+		renderer : returnName,
 		autoSizeColumn : true,
-	}, {
-		text : "Currency Price",
-		dataIndex : "currencyPrice",
-		autoSizeColumn : true,
-		editor : {
-			// defaults to textfield if no xtype is supplied
-			allowBlank : false
-		}
 	}, {
 		text : "Foreign Shipping Cost",
 		dataIndex : "foreignShipCost",
-		autoSizeColumn : true,
-		editor : {
-			// defaults to textfield if no xtype is supplied
-			allowBlank : false
-		}
-	}, {
-		text : "Local Shipping Cost",
-		dataIndex : "localShipCost",
-		autoSizeColumn : true,
-		editor : {
-			// defaults to textfield if no xtype is supplied
-			allowBlank : false
-		}
-	}, {
-		text : "Logit. Code",
-		dataIndex : "logisticCode",
-		autoSizeColumn : true,
-		editor : {
-			// defaults to textfield if no xtype is supplied
-			allowBlank : false
-		}
-	}, {
-		text : "Tracking No.",
-		dataIndex : "trackingNo",
-		autoSizeColumn : true,
-		editor : {
-			// defaults to textfield if no xtype is supplied
-			allowBlank : false
-		}
-	}, {
-		text : "Invoice Code",
-		dataIndex : "invoice",
 		autoSizeColumn : true,
 		editor : {
 			// defaults to textfield if no xtype is supplied
@@ -468,4 +497,130 @@ var purchaseGrid = Ext.create('Ext.grid.Panel', {
 
 });
 
+var purchaseItemGrid = Ext.create('Ext.grid.Panel', {
+	width : 1000,
+	bufferedRenderer : false,
+	store : purchaseItemStore,
+	columns : [ {
+		text : "item name",
+		dataIndex : 'item',
+		renderer : returnName,
+		sortable : true,
+	},  {
+		text : "Quantity",
+		dataIndex : "quantity",
+		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
+	},  {
+		text : "Size",
+		dataIndex : "size",
+		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
+	},   {
+		text : "Price",
+		dataIndex : "price",
+		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
+	}, {
+		text : "Shipment Code",
+		dataIndex : "purchaseShipment",
+		renderer : function(val)
+		{
+			return val.shipmentCode;
+		},
+		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
+	}, {
+		text : "Purchase Code",
+		dataIndex : "purchaseShipment",
+		renderer : function(val)
+		{
+			return val.purchase.id;
+		},
+		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
+	}, {
+		text : "delivered",
+		dataIndex : "delivered",
+		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
+	} ],
+	viewConfig : {
+		listeners : {
+			refresh : function(dataview) {
+				Ext.each(dataview.panel.columns, function(column) {
+					if (column.autoSizeColumn === true)
+						column.autoSize();
+				})
+			}
+		}
+	},
+	plugins : [ purchaseEditing ],
+	split : true,
+
+});
+
+var purchaseShipmentGrid = Ext.create('Ext.grid.Panel', {
+	width : 1000,
+	bufferedRenderer : false,
+	store : purchaseShipmentStore,
+	columns : [ {
+		text : "Code",
+		dataIndex : 'id',
+		sortable : true,
+	},{
+		text : "Shipment Code",
+		dataIndex : 'shipmentCode',
+		sortable : true,
+	}, {
+		text : "Local Shipping Cost",
+		dataIndex : "localShippingCost",
+		autoSizeColumn : true,
+		editor : {
+			// defaults to textfield if no xtype is supplied
+			allowBlank : false
+		}
+	},{
+		text : "Status",
+		dataIndex : 'status',
+		renderer:returnName,
+		sortable : true,
+	},{
+		text : "purchase Order Code",
+		dataIndex : 'purchase',
+		renderer: returnId,
+		sortable : true,
+	}  ],
+	viewConfig : {
+		listeners : {
+			refresh : function(dataview) {
+				Ext.each(dataview.panel.columns, function(column) {
+					if (column.autoSizeColumn === true)
+						column.autoSize();
+				})
+			}
+		}
+	},
+	plugins : [ purchaseEditing ],
+	split : true,
+
+});
 // end grid

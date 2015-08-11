@@ -14,19 +14,19 @@ public class Client {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long clientId;
+	private long id;
 	private String name;
 	private int phoneNo;
 
 	public Client() {
 	}
 
-	public long getClientId() {
-		return this.clientId;
+	public long getId() {
+		return this.id;
 	}
 
-	public void setClientId(long clientId) {
-		this.clientId = clientId;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getName() {

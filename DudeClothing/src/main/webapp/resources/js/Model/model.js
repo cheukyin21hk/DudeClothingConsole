@@ -11,9 +11,7 @@ Ext.define('Account', {
 	}, {
 		name : 'name',
 		type : 'string'
-	}
-
-	]
+	} ]
 });
 
 Ext.define('Brand', {
@@ -24,10 +22,21 @@ Ext.define('Brand', {
 	}, {
 		name : 'name',
 		type : 'string'
-	}
-	
-	]
-	
+	} ]
+});
+
+Ext.define('Item', {
+	extend : 'Ext.data.Model',
+	fields : [ {
+		name : 'id',
+		type : 'int'
+	}, {
+		name : 'brandId',
+		type : 'int'
+	}, {
+		name : 'name',
+		type : 'string'
+	} ]
 });
 
 Ext.define('Client', {
@@ -41,9 +50,7 @@ Ext.define('Client', {
 	}, {
 		name : 'phoneNo',
 		type : 'int'
-	}
-
-	]
+	} ]
 });
 
 Ext.define('Currency', {
@@ -57,9 +64,7 @@ Ext.define('Currency', {
 	}, {
 		name : 'rate',
 		type : 'float'
-	}
-
-	]
+	} ]
 });
 
 Ext.define('Status', {
@@ -70,83 +75,96 @@ Ext.define('Status', {
 	}, {
 		name : 'name',
 		type : 'string'
-	}
-
-	]
-});
-
-Ext.define('Order', {
-	extend : 'Ext.data.Model',
-	requires : ['Account','Stock','Status','Client'],
-	fields : [ {
-		name : 'orderId',
-		type : 'int'
-	}, {
-		name : 'price',
-		type : 'int'
-	}, {
-		name : 'orderDate',
-		type : 'int'
-	}, {
-		name : 'depositeDate',
-		type : 'int'
-	}, 'stock', {
-		name : 'deposit',
-		type : 'int'
-	}, 'client',
-	'account',
-	'status'
-
-	]
-});
-
-Ext.define('Purchase', {
-	extend : 'Ext.data.Model',
-	requires : ['Currency'],
-	fields : [ {
-		name : 'purchaseId',
-		type : 'int'
-	}, {
-		name : 'date',
-		type : 'int'
-	}, {
-		name : 'quantity',
-		type : 'int'
-	}, 'currency', {
-		name : 'currencyPrice',
-		type : 'int'
-	}, {
-		name : 'foreignShipCost',
-		type : 'int'
-	}, {
-		name : 'localShipCost',
-		type : 'int'
-	}, {
-		name : 'logisticCode',
-		type : 'int'
-	}, {
-		name : 'trackingNo',
-		type : 'int'
-	}, {
-		name : 'invoice',
-		type : 'int'
 	} ]
 });
-Ext.define('Stock', {
+
+Ext.define('SaleOrder', {
 	extend : 'Ext.data.Model',
-	requires : ['Brand','Purchase'],
+	requires : [ 'Client', 'Status', 'Account' ],
 	fields : [ {
-		name : 'stockId',
+		name : 'id',
 		type : 'int'
+	}, 'client', 'status', 'account', {
+		name : 'deposit',
+		type : 'float'
+	}, {
+		name : 'orderDate',
+		type : 'date'
+	}, {
+		name : 'depositeDate',
+		type : 'date'
+	} ]
+});
+
+Ext.define('PurchaseOrder', {
+	extend : 'Ext.data.Model',
+	requires : [ 'Currency' ],
+	fields : [ {
+		name : 'id',
+		type : 'int'
+	}, {
+		name : 'purchaseDate',
+		type : 'date'
+	}, {
+		name : 'foreignShipCost',
+		type : 'float'
+	}, 'currency' ]
+});
+
+Ext.define('SaleItem', {
+	extend : 'Ext.data.Model',
+	requires : [ 'Item', 'SaleOrder', 'PurchaseOrder' ],
+	fields : [ {
+		name : 'id',
+		type : 'int'
+	}, 'item', 'saleOrder', 'purchaseOrder', {
+		name : 'delivered',
+		type : 'bool'
+	}, {
+		name : 'price',
+		type : 'float'
 	}, {
 		name : 'size',
 		type : 'string'
-	},'brand', {
-		name : 'name',
+	}, {
+		name : 'quantity',
+		type : 'int'
+	} ]
+});
+
+Ext.define('PurchaseShipment', {
+	extend : 'Ext.data.Model',
+	requires : [ 'PurchaseOrder', 'Status' ],
+	fields : [ {
+		name : 'id',
+		type : 'int'
+	}, {
+		name : 'shipmentCode',
 		type : 'string'
 	}, {
-		name : 'sold',
-		type : 'string'
-	},'purchase' ]	
+		name : 'localShippingCost',
+		type : 'float'
+	}, 'purchase', 'status' ]
+
 });
+
+Ext.define('PurchaseItem', {
+	extend : 'Ext.data.Model',
+	requires : [ 'Item', 'PurchaseOrder', 'PurchaseShipment' ],
+	fields : [ {
+		name : 'size',
+		type : 'string'
+	}, {
+		name : 'quantity',
+		type : 'int'
+	}, {
+		name : 'price',
+		type : 'float'
+	}, 'purchaseShippment', 'item', 'purchaseOrder', {
+		name : 'delivered',
+		type : 'string'
+	} ]
+
+});
+
 // end model

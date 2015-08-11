@@ -14,7 +14,7 @@ public class Account {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long accountId;
+	private long id;
 	private String name;
 
 	public Account() {
@@ -24,12 +24,12 @@ public class Account {
 		this.name = name;
 	}
 
-	public long getAccountId() {
-		return this.accountId;
+	public long getId() {
+		return this.id;
 	}
 
-	public void setAccountId(long accountId) {
-		this.accountId = accountId;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getName() {

@@ -1,0 +1,16 @@
+1437662367810	Encapsulate field 'shipmentPK'
+1437812166151	Move compilation unit
+1437812170647	Delete element
+1437812185874	Move compilation units
+1437812201200	Move compilation units
+1437836058046	Delete elements
+1437839041832	Rename package 'com.dudeclothing.admin.generatedModel'
+1437839072919	Delete element
+1437839080981	Copy compilation units
+1437839090854	Rename type 'Item'
+1437839108660	Rename type 'PurchaseItem'
+1437839120011	Rename type 'PurchaseOrder'
+1437839129432	Rename type 'PurchaseShipment'
+1437839134668	Rename type 'SaleItem'
+1437839138618	Rename type 'SaleOrder'
+1437839590712	Encapsulate field 'item'

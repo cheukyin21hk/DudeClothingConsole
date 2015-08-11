@@ -1,0 +1,929 @@
+/**
+ * 
+ */
+// start creating the form for each basic info
+Ext.define('com.dudeClothing.AccountForm', {
+	extend : 'Ext.form.Panel',
+	xtype : 'dudeAccountForm',
+	bodyPadding : 10,
+	defaultType : 'textfield',
+	items : [
+			{
+				id : 'accountFormStatus',
+				xtype : 'displayfield',
+			},
+			{
+				xtype : 'textfield',
+				fieldLabel : 'Account Name',
+				name : 'name',
+				nullable : false
+			},
+			{
+				xtype : 'button',
+				text : 'Add new account',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					var name = form.findField('name').getSubmitValue();
+					if (form.isValid()) {
+						Ext.Ajax.request({
+							url : '/admin/account/add',
+							method : 'GET',
+							params : {
+								name : name
+							},
+							success : function() {
+								Ext.getCmp('accountFormStatus').setValue(
+										"The account \"" + name + "\" is add");
+								accountStore.load();
+							},
+							failure : function() {
+								console.log('failure');
+							}
+						});
+					}
+				}
+			}, {
+				xtype : 'button',
+				text : 'Reset',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					form.reset();
+				}
+			} ]
+});
+
+Ext.define('com.dudeClothing.BrandForm', {
+	extend : 'Ext.form.Panel',
+	xtype : 'dudeBrandForm',
+	bodyPadding : 10,
+	defaultType : 'textfield',
+	items : [
+			{
+				id : 'brandFormStatus',
+				xtype : 'displayfield',
+			},
+			{
+
+				xtype : 'textfield',
+				fieldLabel : 'Brand Name',
+				name : 'name',
+				nullable : false
+			},
+			{
+				xtype : 'button',
+				text : 'Add new brand',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					var name = form.findField('name').getSubmitValue();
+					if (form.isValid()) {
+						Ext.Ajax.request({
+							url : '/admin/brand/add',
+							method : 'GET',
+							params : {
+								name : name
+							},
+							success : function() {
+								Ext.getCmp('brandFormStatus').setValue(
+										"The brand \"" + name + "\" is add");
+								brandStore.load();
+							},
+							failure : function() {
+								console.log('failure');
+							}
+						});
+					}
+				}
+			}, {
+				xtype : 'button',
+				text : 'Reset',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					form.reset();
+				}
+			} ]
+});
+
+Ext.define('com.dudeClothing.ClientForm', {
+	extend : 'Ext.form.Panel',
+	xtype : 'dudeClientForm',
+	bodyPadding : 10,
+	defaultType : 'textfield',
+	items : [
+			{
+				id : 'clientFormStatus',
+				xtype : 'displayfield',
+			},
+			{
+				fieldLabel : 'Client Name',
+				name : 'name'
+			},
+			{
+				xtype : 'numberfield',
+				fieldLabel : 'Client Phone Number',
+				name : 'phoneNumber'
+			},
+			{
+				xtype : 'button',
+				text : 'Add new client',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					var name = form.findField('name').getSubmitValue();
+					var phoneNumber = form.findField('phoneNumber')
+							.getSubmitValue();
+					if (form.isValid()) {
+						Ext.Ajax.request({
+							url : '/admin/client/add',
+							method : 'GET',
+							params : {
+								name : name,
+								phoneNumber : phoneNumber
+							},
+							success : function() {
+								Ext.getCmp('clientFormStatus').setValue(
+										"The client \"" + name + "\" is add");
+								clientStore.load();
+								console.log('success');
+							},
+							failure : function() {
+								alert('error');
+								console.log('failure');
+							}
+						});
+					}
+				}
+			}, {
+				xtype : 'button',
+				text : 'Reset',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					form.reset();
+				}
+			} ]
+});
+
+Ext.define('com.dudeClothing.CurrencyForm', {
+	extend : 'Ext.form.Panel',
+	xtype : 'dudeCurrencyForm',
+	bodyPadding : 10,
+	defaultType : 'textfield',
+	items : [
+			{
+				id : 'currencyFormStatus',
+				xtype : 'displayfield',
+			},
+			{
+				xtype : 'textfield',
+				fieldLabel : 'Currency Name',
+				name : 'name',
+				nullable : false
+			},
+			{
+				xtype : 'numberfield',
+				fieldLabel : 'Currency Rate',
+				name : 'rate'
+			},
+			{
+				xtype : 'button',
+				text : 'Add new currency',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					var name = form.findField('name').getSubmitValue();
+					var rate = form.findField('rate').getSubmitValue();
+					if (form.isValid()) {
+						Ext.Ajax
+								.request({
+									url : '/admin/currency/add',
+									method : 'GET',
+									params : {
+										name : name,
+										rate : rate
+									},
+									success : function() {
+										Ext.getCmp('currencyFormStatus')
+												.setValue(
+														"The currency \""
+																+ name
+																+ "\" is add");
+										console.log('success');
+										currencyStore.load();
+									},
+									failure : function() {
+										alert('error');
+										console.log('failure');
+									}
+								});
+					}
+				}
+			}, {
+				xtype : 'button',
+				text : 'Reset',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					form.reset();
+				}
+			} ]
+});
+
+Ext.define('com.dudeClothing.ItemForm', {
+	extend : 'Ext.form.Panel',
+	xtype : 'dudeItemForm',
+	bodyPadding : 10,
+	defaultType : 'textfield',
+	items : [
+			{
+				id : 'itemFormStatus',
+				xtype : 'displayfield',
+			},
+			{
+				xtype : 'textfield',
+				fieldLabel : 'item Name',
+				name : 'name',
+				nullable : false
+			},
+			{
+				xtype : 'dudeBrandDropdown'
+			},
+			{
+				xtype : 'button',
+				text : 'Add new brand',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					var name = form.findField('name').getSubmitValue();
+					if (form.isValid()) {
+						Ext.Ajax.request({
+							url : '/admin/item/add',
+							method : 'GET',
+							params : {
+								name : name
+							},
+							success : function() {
+								Ext.getCmp('itemFormStatus').setValue(
+										"The item \"" + name + "\" is add");
+								brandStore.load();
+							},
+							failure : function() {
+								console.log('failure');
+							}
+						});
+					}
+				}
+			}, {
+				xtype : 'button',
+				text : 'Reset',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					form.reset();
+				}
+			} ]
+});
+
+Ext.define('com.dudeClothing.StatusForm', {
+	extend : 'Ext.form.Panel',
+	xtype : 'dudeStatusForm',
+	bodyPadding : 10,
+	defaultType : 'textfield',
+	items : [
+			{
+				id : 'statusFormStatus',
+				xtype : 'displayfield',
+			},
+			{
+				xtype : 'textfield',
+				fieldLabel : 'Status Name',
+				name : 'name',
+				allowBlank : false
+			},
+			{
+				xtype : 'button',
+				text : 'Add new status',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					var name = form.findField('name').getSubmitValue();
+					if (form.isValid()) {
+						Ext.Ajax.request({
+							url : '/admin/status/add',
+							method : 'GET',
+							params : {
+								name : name
+							},
+							success : function() {
+								Ext.getCmp('statusFormStatus').setValue(
+										"The status \"" + name + "\" is add");
+								console.log('success');
+								statusStore.load();
+							},
+							failure : function() {
+								console.log('failure');
+							}
+						});
+					}
+				}
+			}, {
+				xtype : 'button',
+				text : 'Reset',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					form.reset();
+				}
+			} ]
+});
+
+Ext.define('com.dudeClothing.SaleOrderForm', {
+	extend : 'Ext.form.Panel',
+	xtype : 'dudeSaleOrderForm',
+	bodyPadding : 10,
+	defaultType : 'textfield',
+	items : [ {
+		xtype : 'textfield',
+		fieldLabel : 'Customer Name',
+		name : 'customerName'
+	}, {
+		xtype : 'numberfield',
+		fieldLabel : 'Customer Number',
+		name : 'customerNumber'
+	}, {
+		xtype : 'numberfield',
+		fieldLabel : "deposit",
+		name : "deposit"
+	}, {
+		xtype : 'datefield',
+		fieldLabel : "Deposite Date",
+		name : 'depositeDate'
+	}, {
+		xtype : 'combo',
+		fieldLabel : 'Choose a Account',
+		store : accountStore,
+		queryMode : 'remote',
+		displayField : 'name',
+		valueField : 'id',
+		name : 'accountId'
+
+	}, {
+		xtype : 'combo',
+		fieldLabel : 'Choose a Status',
+		store : statusStore,
+		queryMode : 'remote',
+		displayField : 'name',
+		valueField : 'id',
+		name : 'statusId'
+	} ],
+
+});
+
+Ext.define('com.dudeClothing.SaleItemForm', {
+	extend : 'Ext.form.Panel',
+	xtype : 'dudeSaleItemForm',
+	bodyPadding : 10,
+	defaultType : 'textfield',
+	items : [
+			{
+				id : 'orderFormStatus',
+				xtype : 'displayfield',
+			},
+			{
+				xtype : 'textfield',
+				fieldLabel : 'size',
+				name : 'size'
+			},
+			{
+				xtype : 'numberfield',
+				fieldLabel : "quantity",
+				name : "quantity"
+			},
+			{
+				xtype : 'numberfield',
+				fieldLabel : "price",
+				name : "price"
+			},
+			{
+				xtype : 'combo',
+				fieldLabel : 'Choose a Brand',
+				store : brandStore,
+				queryMode : 'remote',
+				displayField : 'name',
+				valueField : 'id',
+				name : 'brandId'
+
+			},
+			{
+
+				xtype : 'combo',
+				fieldLabel : 'Delivered',
+				name : 'delivered',
+				queryMode : 'local',
+				store : Ext.create('Ext.data.Store', {
+					fields : [ 'value', 'display' ],
+					data : [ {
+						"display" : "Yes",
+						"value" : 'Y'
+					}, {
+						"display" : "No",
+						"value" : 'N'
+					} ]
+				}),
+				displayField : 'display',
+				valueField : 'value',
+				autoSelect : true,
+				forceSelection : true
+			},
+			{
+				xtype : 'textfield',
+				fieldLabel : "Item name",
+				name : "item"
+			},
+			{
+				xtype : 'button',
+				text : 'Add New Order',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					var stockId = form.findField('stockId').getSubmitValue();
+					if (form.isValid()) {
+						Ext.Ajax.request({
+							url : '/admin/transaction/addOrder',
+							method : 'GET',
+							params : {
+								price : form.findField('price')
+										.getSubmitValue(),
+								depositeDate : form.findField('depositeDate')
+										.getSubmitValue(),
+								stockId : stockId,
+								deposit : form.findField('deposit')
+										.getSubmitValue(),
+								clientId : form.findField('clientId')
+										.getSubmitValue(),
+								statusId : form.findField('statusId')
+										.getSubmitValue(),
+								accountId : form.findField('accountId')
+										.getSubmitValue()
+							},
+							success : function() {
+								console.log('success');
+								Ext.getCmp('orderFormStatus').setValue(
+										"The order with stock \"" + stockId
+												+ "\" is add");
+								orderStore.load();
+								stockStore.load();
+							},
+							failure : function() {
+								console.log('failure');
+							}
+						});
+					}
+				}
+			}, {
+				xtype : 'button',
+				text : 'Reset',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					form.reset();
+				}
+			} ]
+});
+
+Ext.define('com.dudeClothing.PurchaseOrderForm', {
+	extend : 'Ext.form.Panel',
+	xtype : 'dudePurchaseOrderForm',
+	bodyPadding : 10,
+	defaultType : 'textfield',
+	items : [
+			{
+				id : 'purchaseFormStatus',
+				xtype : 'displayfield',
+			},
+			{
+				xtype : 'numberfield',
+				fieldLabel : 'quantity',
+				name : 'quantity'
+			},
+			{
+				xtype : 'dudeCurrencyDropdown'
+			},
+			{
+				xtype : 'numberfield',
+				fieldLabel : "Price in Currency",
+				name : "currencyPrice"
+			},
+			{
+				xtype : 'numberfield',
+				fieldLabel : "foreignShipCost",
+				name : "foreignShipCost"
+			},
+			{
+				xtype : 'numberfield',
+				fieldLabel : "localShipCost",
+				name : "localShipCost"
+			},
+			{
+				xtype : 'textfield',
+				fieldLabel : "logisticCode",
+				name : "logisticCode",
+				nullable : false
+			},
+			{
+				xtype : 'textfield',
+				fieldLabel : "trackingNo",
+				name : "trackingNo",
+				nullable : false
+			},
+			{
+				xtype : 'textfield',
+				fieldLabel : "invoice",
+				name : "invoice"
+			},
+			{
+				xtype : 'dudeBrandDropdown'
+			},
+			{
+				xtype : 'textfield',
+				fieldLabel : "Size",
+				name : "size",
+				nullable : false
+			},
+			{
+				xtype : 'textfield',
+				fieldLabel : "Stock Name",
+				name : "stockName",
+				nullable : false
+			},
+			{
+				xtype : 'button',
+				text : 'Add New Purchase',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					var stockName = form.findField('stockName')
+							.getSubmitValue();
+					if (form.isValid()) {
+						Ext.Ajax.request({
+							url : '/admin/transaction/addPurchase',
+							method : 'GET',
+							params : {
+								quantity : form.findField('quantity')
+										.getSubmitValue(),
+								currencyPrice : form.findField('currencyPrice')
+										.getSubmitValue(),
+								foreignShipCost : form.findField(
+										'foreignShipCost').getSubmitValue(),
+								localShipCost : form.findField('localShipCost')
+										.getSubmitValue(),
+								trackingNo : form.findField('trackingNo')
+										.getSubmitValue(),
+								invoice : form.findField('invoice')
+										.getSubmitValue(),
+								logisticCode : form.findField('logisticCode')
+										.getSubmitValue(),
+								stockName : stockName,
+								size : form.findField('size').getSubmitValue(),
+								brandId : form.findField('brandId')
+										.getSubmitValue(),
+								currencyId : form.findField('currencyId')
+										.getSubmitValue()
+							},
+							success : function() {
+								console.log('success');
+								Ext.getCmp('purchaseFormStatus').setValue(
+										"The purchase record with stock"
+												+ stockName + " is add");
+								purchaseStore.load();
+								stockStore.load();
+							},
+							failure : function() {
+								console.log('failure');
+							}
+						});
+					}
+				}
+			}, {
+				xtype : 'button',
+				text : 'Reset',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					form.reset();
+				}
+			} ]
+});
+
+Ext.define('com.dudeClothing.PurchaseShipmentForm', {
+	extend : 'Ext.form.Panel',
+	xtype : 'dudePurchaseShipmentForm',
+	bodyPadding : 10,
+	defaultType : 'textfield',
+	items : [
+			{
+				id : 'purchaseFormStatus',
+				xtype : 'displayfield',
+			},
+			{
+				xtype : 'numberfield',
+				fieldLabel : 'quantity',
+				name : 'quantity'
+			},
+			{
+				xtype : 'dudeCurrencyDropdown'
+			},
+			{
+				xtype : 'numberfield',
+				fieldLabel : "Price in Currency",
+				name : "currencyPrice"
+			},
+			{
+				xtype : 'numberfield',
+				fieldLabel : "foreignShipCost",
+				name : "foreignShipCost"
+			},
+			{
+				xtype : 'numberfield',
+				fieldLabel : "localShipCost",
+				name : "localShipCost"
+			},
+			{
+				xtype : 'textfield',
+				fieldLabel : "logisticCode",
+				name : "logisticCode",
+				nullable : false
+			},
+			{
+				xtype : 'textfield',
+				fieldLabel : "trackingNo",
+				name : "trackingNo",
+				nullable : false
+			},
+			{
+				xtype : 'textfield',
+				fieldLabel : "invoice",
+				name : "invoice"
+			},
+			{
+				xtype : 'dudeBrandDropdown'
+			},
+			{
+				xtype : 'textfield',
+				fieldLabel : "Size",
+				name : "size",
+				nullable : false
+			},
+			{
+				xtype : 'textfield',
+				fieldLabel : "Stock Name",
+				name : "stockName",
+				nullable : false
+			},
+			{
+				xtype : 'button',
+				text : 'Add New Purchase',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					var stockName = form.findField('stockName')
+							.getSubmitValue();
+					if (form.isValid()) {
+						Ext.Ajax.request({
+							url : '/admin/transaction/addPurchase',
+							method : 'GET',
+							params : {
+								quantity : form.findField('quantity')
+										.getSubmitValue(),
+								currencyPrice : form.findField('currencyPrice')
+										.getSubmitValue(),
+								foreignShipCost : form.findField(
+										'foreignShipCost').getSubmitValue(),
+								localShipCost : form.findField('localShipCost')
+										.getSubmitValue(),
+								trackingNo : form.findField('trackingNo')
+										.getSubmitValue(),
+								invoice : form.findField('invoice')
+										.getSubmitValue(),
+								logisticCode : form.findField('logisticCode')
+										.getSubmitValue(),
+								stockName : stockName,
+								size : form.findField('size').getSubmitValue(),
+								brandId : form.findField('brandId')
+										.getSubmitValue(),
+								currencyId : form.findField('currencyId')
+										.getSubmitValue()
+							},
+							success : function() {
+								console.log('success');
+								Ext.getCmp('purchaseFormStatus').setValue(
+										"The purchase record with stock"
+												+ stockName + " is add");
+								purchaseStore.load();
+								stockStore.load();
+							},
+							failure : function() {
+								console.log('failure');
+							}
+						});
+					}
+				}
+			}, {
+				xtype : 'button',
+				text : 'Reset',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					form.reset();
+				}
+			} ]
+});
+
+Ext.define('com.dudeClothing.PurchaseItemForm', {
+	extend : 'Ext.form.Panel',
+	xtype : 'dudePurchaseItemForm',
+	bodyPadding : 10,
+	defaultType : 'textfield',
+	items : [
+			{
+				id : 'currencyFormStatus',
+				xtype : 'displayfield',
+			},
+			{
+				xtype : 'textfield',
+				fieldLabel : 'Currency Name',
+				name : 'name',
+				nullable : false
+			},
+			{
+				xtype : 'numberfield',
+				fieldLabel : 'Currency Rate',
+				name : 'rate'
+			},
+			{
+				xtype : 'button',
+				text : 'Add new currency',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					var name = form.findField('name').getSubmitValue();
+					var rate = form.findField('rate').getSubmitValue();
+					if (form.isValid()) {
+						Ext.Ajax
+								.request({
+									url : '/admin/currency/add',
+									method : 'GET',
+									params : {
+										name : name,
+										rate : rate
+									},
+									success : function() {
+										Ext.getCmp('currencyFormStatus')
+												.setValue(
+														"The currency \""
+																+ name
+																+ "\" is add");
+										console.log('success');
+										currencyStore.load();
+									},
+									failure : function() {
+										alert('error');
+										console.log('failure');
+									}
+								});
+					}
+				}
+			}, {
+				xtype : 'button',
+				text : 'Reset',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					form.reset();
+				}
+			} ]
+});
+
+Ext.define('com.dudeClothing.PurchaseTransaction', {
+	extend : 'Ext.form.Panel',
+	xtype : 'dudePurchaseTransaction',
+	bodyPadding : 10,
+	defaultType : 'textfield',
+	items : [
+			{
+				id : 'currencyFormStatus',
+				xtype : 'displayfield',
+			},
+			{
+				xtype : 'textfield',
+				fieldLabel : 'Currency Name',
+				name : 'name',
+				nullable : false
+			},
+			{
+				xtype : 'numberfield',
+				fieldLabel : 'Currency Rate',
+				name : 'rate'
+			},
+			{
+				xtype : 'button',
+				text : 'Add new currency',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					var name = form.findField('name').getSubmitValue();
+					var rate = form.findField('rate').getSubmitValue();
+					if (form.isValid()) {
+						Ext.Ajax
+								.request({
+									url : '/admin/currency/add',
+									method : 'GET',
+									params : {
+										name : name,
+										rate : rate
+									},
+									success : function() {
+										Ext.getCmp('currencyFormStatus')
+												.setValue(
+														"The currency \""
+																+ name
+																+ "\" is add");
+										console.log('success');
+										currencyStore.load();
+									},
+									failure : function() {
+										alert('error');
+										console.log('failure');
+									}
+								});
+					}
+				}
+			}, {
+				xtype : 'button',
+				text : 'Reset',
+				margin : 10,
+				handler : function() {
+					var form = this.up('form').getForm();
+					form.reset();
+				}
+			} ]
+});
+
+
+var accountForm = Ext.create('com.dudeClothing.AccountForm', {
+	region : "center",
+	bodyPadding : 10,
+});
+
+var brandForm = Ext.create('com.dudeClothing.BrandForm', {
+	region : "center",
+	bodyPadding : 10,
+});
+
+var clientForm = Ext.create('com.dudeClothing.ClientForm', {
+	region : "center",
+	bodyPadding : 10,
+});
+
+var currencyForm = Ext.create('com.dudeClothing.CurrencyForm', {
+	region : "center",
+	bodyPadding : 10,
+});
+
+var itemForm = Ext.create('com.dudeClothing.ItemForm', {
+	region : "center",
+	bodyPadding : 10,
+});
+
+var statusForm = Ext.create('com.dudeClothing.StatusForm', {
+	region : "center",
+	bodyPadding : 10,
+});
+
+var saleOrderForm = Ext.create('com.dudeClothing.SaleOrderForm', {
+	bodyPadding : 10,
+});
+
+var saleItemForm = Ext.create('com.dudeClothing.SaleItemForm', {
+	bodyPadding : 10,
+});
+
+var purchaseOrderForm = Ext.create('com.dudeClothing.PurchaseOrderForm', {
+	region : "center",
+	bodyPadding : 10,
+
+});
+
+var purchaseItemForm = Ext.create('com.dudeClothing.PurchaseItemForm', {
+	region : "center",
+	bodyPadding : 10
+});
+
+var purchaseShipmentForm = Ext.create('com.dudeClothing.PurchaseShipmentForm',
+		{
+			region : "center",
+			bodyPadding : 10,
+		});

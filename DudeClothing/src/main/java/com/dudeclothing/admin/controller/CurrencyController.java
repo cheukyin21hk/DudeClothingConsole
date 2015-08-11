@@ -2,6 +2,7 @@ package com.dudeclothing.admin.controller;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,13 +17,18 @@ import com.dudeclothing.admin.service.CurrencyServices;
 @Controller
 @RequestMapping("currency")
 public class CurrencyController {
+
+	private final Logger logger = Logger.getLogger(CurrencyController.class);
+
 	@Autowired
 	private CurrencyServices currencyServices;
 
 	@RequestMapping(value = "/currencys", method = RequestMethod.GET)
 	@ResponseBody
 	public List<Currency> listAll(Model model) {
-		System.out.println("Currency list all is called");
+		if (logger.isInfoEnabled()) {
+			logger.info("Currency list all is called");
+		}
 		List<Currency> list = currencyServices.getAll();
 		return list;
 	}
@@ -31,12 +37,16 @@ public class CurrencyController {
 	@ResponseBody
 	public Currency addCurrency(@RequestParam(value = "name") String name,
 			@RequestParam(value = "rate") Float rate) {
-		System.out.println("Currency added");
+		if (logger.isInfoEnabled()) {
+			logger.info("Currency added");
+		}
 		Currency currency = new Currency();
 		currency.setName(name);
 		currency.setRate(rate);
 		currencyServices.add(currency);
-		System.out.println(currency.toString());
+		if (logger.isInfoEnabled()) {
+			logger.info(currency.toString());
+		}
 		return currency;
 	}
 

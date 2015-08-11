@@ -1,0 +1,191 @@
+// create the Data Store for each basic info
+var accountStore = Ext.create('Ext.data.Store', {
+	autoLoad : true,
+	autoSync : true,
+	model : 'Account',
+	proxy : {
+		type : 'rest',
+		url : '/admin/account/accounts',
+		reader : {
+			type : 'json',
+			rootProperty : 'data'
+		},
+		writer : {
+			type : 'json'
+		}
+	}
+});
+
+Ext.define('com.dudeClothing.AccountStore', {
+
+});
+
+var currencyStore = Ext.create('Ext.data.Store', {
+	autoLoad : true,
+	autoSync : true,
+	model : 'Currency',
+	proxy : {
+		type : 'rest',
+		url : '/admin/currency/currencys',
+		reader : {
+			type : 'json',
+			rootProperty : 'data'
+		},
+		writer : {
+			type : 'json'
+		}
+	}
+});
+
+var itemStore = Ext.create('Ext.data.Store', {
+	autoLoad : true,
+	autoSync : true,
+	model : 'Item',
+	proxy : {
+		type : 'rest',
+		url : '/admin/item/items',
+		reader : {
+			type : 'json',
+			rootProperty : 'data'
+		},
+		writer : {
+			type : 'json'
+		}
+	}
+});
+var brandStore = Ext.create('Ext.data.Store', {
+	autoLoad : true,
+	autoSync : true,
+	model : 'Brand',
+	proxy : {
+		type : 'rest',
+		url : '/admin/brand/brands',
+		reader : {
+			type : 'json',
+			rootProperty : 'data'
+		},
+		writer : {
+			type : 'json'
+		}
+	}
+});
+
+var statusStore = Ext.create('Ext.data.Store', {
+	autoLoad : true,
+	autoSync : true,
+	model : 'Status',
+	proxy : {
+		type : 'rest',
+		url : '/admin/status/statuses',
+		reader : {
+			type : 'json',
+			rootProperty : 'data'
+		},
+		writer : {
+			type : 'json'
+		}
+	}
+});
+
+var purchaseOrderStore = Ext.create('Ext.data.Store', {
+	autoLoad : true,
+	autoSync : true,
+	model : 'PurchaseOrder',
+	proxy : {
+		type : 'rest',
+		url : '/admin/transaction/purchaseOrders',
+		reader : {
+			type : 'json',
+			rootProperty : 'data'
+		},
+		writer : {
+			type : 'json'
+		}
+	}
+});
+
+var purchaseShipmentStore = Ext.create('Ext.data.Store', {
+	autoLoad : true,
+	autoSync : true,
+	model : 'PurchaseShipment',
+	proxy : {
+		type : 'rest',
+		url : '/admin/transaction/purchaseShipments',
+		reader : {
+			type : 'json',
+			rootProperty : 'data'
+		},
+		writer : {
+			type : 'json'
+		}
+	}
+});
+
+var purchaseItemStore = Ext.create('Ext.data.Store', {
+	autoLoad : true,
+	autoSync : true,
+	model : 'PurchaseItem',
+	proxy : {
+		type : 'rest',
+		url : '/admin/transaction/purchaseItems',
+		reader : {
+			type : 'json',
+			rootProperty : 'data'
+		},
+		writer : {
+			type : 'json'
+		}
+	}
+});
+
+var saleOrderStore = Ext.create('Ext.data.Store', {
+	autoLoad : true,
+	autoSync : true,
+	model : 'SaleOrder',
+	proxy : {
+		type : 'rest',
+		url : '/admin/transaction/saleOrders',
+		reader : {
+			type : 'json',
+			rootProperty : 'data'
+		},
+		writer : {
+			type : 'json'
+		}
+	}
+});
+
+var saleItemStore = Ext.create('Ext.data.Store', {
+	autoLoad : true,
+	autoSync : true,
+	model : 'SaleItem',
+	proxy : {
+		type : 'rest',
+		url : '/admin/transaction/saleItems',
+		reader : {
+			type : 'json',
+			rootProperty : 'data'
+		},
+		writer : {
+			type : 'json'
+		}
+	}
+});
+
+var clientStore = Ext.create('Ext.data.Store', {
+	autoLoad : true,
+	autoSync : true,
+	model : 'Client',
+	proxy : {
+		type : 'rest',
+		url : '/admin/client/clients',
+		reader : {
+			type : 'json',
+			rootProperty : 'data'
+		},
+		writer : {
+			type : 'json'
+		}
+	}
+});
+// end store
